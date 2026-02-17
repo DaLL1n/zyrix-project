@@ -1,0 +1,95 @@
+// --- Font Family ---
+$font-family: var(--font-poppins), sans-serif;
+
+// --- Font Weights ---
+$regular: 400;
+$medium: 500;
+$semibold: 600;
+
+// --- Display ---
+$display1-size: 60px;
+$display1-weight: $semibold;
+
+$display2-size: 54px;
+$display2-weight: $semibold;
+
+$display3-size: 60px;
+$display3-weight: $medium;
+
+$display4-size: 54px;
+$display4-weight: $medium;
+
+// --- Headline ---
+$head1-size: 48px;
+$head1-weight: $medium;
+
+$head2-size: 44px;
+$head2-weight: $medium;
+
+$head3-size: 40px;
+$head3-weight: $medium;
+
+$head4-size: 32px;
+$head4-weight: $medium;
+
+$head5-size: 24px;
+$head5-weight: $medium;
+
+$head6-size: 20px;
+$head6-weight: $medium;
+
+$head7-size: 16px;
+$head7-weight: $medium;
+
+$head8-size: 14px;
+$head8-weight: $medium;
+
+// --- Body ---
+$body1-size: 20px;
+$body1-weight: $regular;
+
+$body2-size: 18px;
+$body2-weight: $regular;
+
+$body3-size: 16px;
+$body3-weight: $regular;
+
+$body4-size: 14px;
+$body4-weight: $regular;
+
+$body5-size: 12px;
+$body5-weight: $regular;
+
+// --- Body Base ---
+$body-base-size: $body3-size;
+$body-base-weight: $body3-weight;
+
+// --- Secondary Text Base ---
+$text-secondary-size: $body4-size;
+$text-secondary-weight: $body4-weight;
+
+// --- Button ---
+$btn1-size: 18px;
+$btn1-weight: $medium;
+
+$btn2-size: 16px;
+$btn2-weight: $medium;
+
+$btn3-size: 14px;
+$btn3-weight: $medium;
+
+$btn4-size: 12px;
+$btn4-weight: $medium;
+
+$btn5-size: 10px;
+$btn5-weight: $medium;
+
+// --- Caption ---
+$caption1-size: 14px;
+$caption1-weight: $regular;
+
+$caption2-size: 12px;
+$caption2-weight: $regular;
+
+$caption3-size: 10px;
+$caption3-weight: $regular;

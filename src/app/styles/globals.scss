@@ -1,0 +1,45 @@
+@forward './normalize.scss';
+@forward './visually-hidden.scss';
+
+@use '../../shared/styles/index' as *;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $neutral-bg-primary;
+  color: $neutral-text-primary;
+  font-family: $font-family;
+  font-size: rem($body-base-size);
+  font-weight: $body-base-weight;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
+
+img {
+  display: block;
+  height: auto;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+textarea {
+  resize: none;
+}
