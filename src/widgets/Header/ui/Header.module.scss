@@ -1,0 +1,45 @@
+@use '../../../shared/styles/index' as *;
+
+.header {
+  padding: rem(28px) rem($padding-3xl);
+  max-width: rem(1328px);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  gap: rem($space-lg);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: rem($space-md);
+}
+
+.auth-actions {
+  display: flex;
+  align-items: center;
+  gap: rem($space-sm);
+}
+
+.auth-link {
+  padding: rem(12.5px) rem($padding-lg);
+  min-height: rem(48px);
+  font-weight: 500;
+  font-size: rem($body4-size);
+  transition: color 0.3s ease;
+}

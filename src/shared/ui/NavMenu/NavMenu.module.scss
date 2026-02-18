@@ -1,0 +1,62 @@
+@use './../../styles/index' as *;
+
+.nav-menu {
+  display: flex;
+}
+
+.nav-menu-header {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  gap: rem($padding-lg);
+}
+
+.nav-menu-link {
+  padding: rem(10px);
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  text-transform: lowercase;
+  font-size: rem($body2-size);
+  color: $neutral-text-secondary;
+  transition: color 0.3s ease;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+
+  &:is(:focus-visible, :hover) {
+    outline: none;
+    color: $secondary;
+  }
+}
+
+.link-active {
+  color: $primary;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: rem(-36px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: rem(94px);
+    height: rem(44px);
+    border-radius: 50%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba($primary, 0.42) 0%,
+      rgba($primary, 0.2) 42%,
+      rgba($primary, 0) 78%
+    );
+    filter: blur(25px);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  &:is(:focus-visible, :hover) {
+    outline: none;
+    color: $primary;
+  }
+}

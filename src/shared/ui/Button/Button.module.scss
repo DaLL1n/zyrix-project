@@ -1,0 +1,22 @@
+@use '../../styles/index' as *;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  border-radius: rem($radius-xl);
+}
+
+.primary {
+  background-color: $primary;
+  color: $neutral-bg-primary;
+}
+
+.secondary {
+  border: 1px solid $neutral-text-secondary;
+  color: $neutral-title;
+}
