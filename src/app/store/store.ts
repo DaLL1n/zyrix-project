@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 
 export const makeStore = () => {
   return configureStore({
@@ -8,6 +8,6 @@ export const makeStore = () => {
 
 declare global {
   type AppStore = ReturnType<typeof makeStore>;
-  type RootState = ReturnType<AppStore["getState"]>;
-  type AppDispatch = AppStore["dispatch"];
+  type RootState = ReturnType<AppStore['getState']>;
+  type AppDispatch = AppStore['dispatch'];
 }

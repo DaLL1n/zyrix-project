@@ -1,0 +1,7 @@
+@use '../../../../shared/styles/index' as *;
+
+.utility-actions {
+  display: flex;
+  align-items: center;
+  gap: rem($space-lg);
+}
