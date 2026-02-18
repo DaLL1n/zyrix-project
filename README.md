@@ -1,6 +1,6 @@
 # ✨ Zyrix — Crypto Currency Website
 
-> Next.js · React 18 · TypeScript · Redux Toolkit · SCSS Modules · FSD Architecture
+> Next.js · React 19 · TypeScript · Redux Toolkit · SCSS Modules · FSD Architecture
 
 ---
 
