@@ -22,9 +22,7 @@ const Layout = ({
 }>) => {
   return (
     <html lang="en">
-      <body className={`${poppins.variable}`}>
-        <main>{children}</main>
-      </body>
+      <body className={`${poppins.variable}`}>{children}</body>
     </html>
   );
 };

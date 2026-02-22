@@ -1,0 +1,38 @@
+@use '../../../../shared/styles/index' as *;
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: rem($space-3xl);
+
+  &-links {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: rem($space-sm);
+  }
+}
+
+.title {
+  display: block;
+  font-size: rem(20px);
+  font-weight: 600;
+  color: $neutral-title;
+  margin-bottom: rem($space-sm);
+}
+
+.item-link {
+  display: flex;
+}
+
+.link {
+  font-size: rem($space-sm);
+  font-weight: 400;
+  color: $neutral-text-primary;
+}

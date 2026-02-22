@@ -9,25 +9,6 @@ import type {
   ButtonProps,
 } from './Button.types';
 
-/**
- * @description Универсальный компонент кнопки с поддержкой работы как нативной кнопки или ссылки.
- *
- * @param props Параметры компонента
- * @param variant Стиль варианта кнопки
- * @param children Содержимое кнопки
- * @param className Дополнительный CSS класс
- * @param href - URL для отрисовки как ссылка (Link). Если указан, компонент отрисуется как Link вместо button
- * @param type- Тип нативной кнопки (button, submit, reset) - используется только если href не передан
- * @returns Link или button в зависимости от наличия href
- *
- * @example
- * // Нативная кнопка
- * <Button variant="primary" onClick={handleClick}>Отправить</Button>
- *
- * @example
- * // Кнопка-ссылка
- * <Button href="/home" variant="secondary">На главную</Button>
- */
 export const Button = ({
   variant = 'primary',
   children,

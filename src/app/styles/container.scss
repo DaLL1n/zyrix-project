@@ -1,0 +1,8 @@
+@use '../../shared/styles/index' as *;
+
+.container {
+  max-width: rem(1440px);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 rem(calc((1440px - 1224px) / 2));
+}
