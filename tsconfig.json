@@ -13,6 +13,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
     "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,

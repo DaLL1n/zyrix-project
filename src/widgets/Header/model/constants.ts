@@ -1,14 +1,14 @@
-import { PathsHeaderKey, PathsHeaderValue } from '@/shared/config';
+import { PATHS, type AppPathValue } from '@/shared/config';
 
 interface HeaderNavItem {
-  label: PathsHeaderKey;
-  href: PathsHeaderValue;
+  label: string;
+  href: AppPathValue;
 }
 
 export const HEADER_NAV_ITEMS: HeaderNavItem[] = [
-  { label: 'HOME', href: '/' },
-  { label: 'MARKET', href: '/market' },
-  { label: 'SPOT', href: '/spot' },
-  { label: 'SUPPORT', href: '/support' },
-  { label: 'LEARN', href: '/learn' },
+  { label: 'Home', href: PATHS.HOME },
+  { label: 'Market', href: PATHS.MARKET },
+  { label: 'Spot', href: PATHS.SPOT },
+  { label: 'Support', href: PATHS.SUPPORT },
+  { label: 'Learn', href: PATHS.LEARN },
 ];

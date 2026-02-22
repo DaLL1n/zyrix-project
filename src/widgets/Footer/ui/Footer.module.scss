@@ -1,0 +1,57 @@
+@use '../../../shared/styles/index' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: rem($space-md);
+  padding: rem($padding-lg) 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: rem($space-lg);
+}
+
+.top {
+  display: flex;
+  gap: rem($space-lg);
+  max-width: rem(1096px);
+  width: 100%;
+  align-self: center;
+  align-items: center;
+}
+
+.logo-link {
+  display: flex;
+}
+
+.line {
+  width: 100%;
+  height: rem(1px);
+  background-color: #7f7f7f;
+}
+
+.copyright-wrapper {
+  padding-top: rem($padding-lg);
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: rem(1px);
+    background-color: $neutral-divider;
+  }
+}
+
+.copyright {
+  font-size: rem(14px);
+  font-weight: 500;
+  text-align: center;
+}

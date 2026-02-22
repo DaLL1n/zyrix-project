@@ -1,17 +1,10 @@
 import Link from 'next/link';
-
-import { Button, Icon, NavMenu } from '@/shared/ui';
-
+import { Button, Icon } from '@/shared/ui';
 import { HEADER_NAV_ITEMS } from '../model/constants';
 import { HeaderUtilityActions } from './HeaderUtilityActions/HeaderUtilityActions';
-
+import { HeaderNavMenu } from './HeaderNavMenu/HeaderNavMenu.client';
 import styles from './Header.module.scss';
 
-/**
- * @description UI-компонент для рендера заголовка страницы с навигацией, логотипом и действиями аутентификации.
- *
- * @returns Готовый header-элемент со ссылкой на главную страницу, меню навигации, утилитами и кнопками входа/регистрации.
- */
 export const Header = () => {
   return (
     <header className={styles['header']}>
@@ -30,11 +23,9 @@ export const Header = () => {
               aria-label="Zyrix logo"
             />
           </Link>
-          <NavMenu>
-            <NavMenu.Header path={HEADER_NAV_ITEMS} />
-          </NavMenu>
+          <HeaderNavMenu />
         </div>
-        <div className={styles['header-actions']}>
+        <div className={styles['actions']}>
           <HeaderUtilityActions />
           <div className={styles['auth-actions']}>
             <Button className={styles['auth-link']} href="/signup">
