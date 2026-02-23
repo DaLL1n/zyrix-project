@@ -1,0 +1,171 @@
+@use '../../../shared/styles/index' as *;
+
+.hero {
+  height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.content {
+  padding-top: rem(100px);
+
+  max-width: rem(651px);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.text-content {
+  margin-bottom: rem(60px);
+}
+
+.title {
+  font-size: rem($display4-size);
+  font-weight: 600;
+  margin: 0 0 rem(16px);
+}
+
+.tags-wrapper {
+  display: flex;
+  gap: rem(16px);
+  font-size: rem($head5-size);
+  color: $neutral-text-secondary;
+}
+
+.button-cta {
+  isolation: isolate;
+  overflow: visible;
+  position: relative;
+  background: transparent;
+  min-height: rem(68px);
+  width: 100%;
+  max-width: rem(259px);
+  border-radius: rem(69px);
+  border: rem(1px) solid rgba(255, 199, 29, 0.24);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: rem(-1px);
+    border-radius: rem(69px);
+    border: 2px solid rgba(255, 193, 7, 0.66);
+    filter: blur(10px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: rem(-4px);
+    transform: translateX(-50%);
+    width: rem(134px);
+    height: rem(21px);
+
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 193, 7, 0.38) 0%,
+      rgba(255, 193, 7, 0.18) 35%,
+      rgba(255, 193, 7, 0.06) 60%,
+      rgba(255, 193, 7, 0) 100%
+    );
+    filter: blur(10px);
+
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &:hover {
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
+    background-color: rgba(255, 193, 7, 0.1);
+    transform: scale(1.01);
+
+    .button-cta-inner {
+      background:
+        linear-gradient(0deg, $primary, $primary),
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0) 53.57%,
+          rgba(255, 255, 255, 0.3) 100%
+        );
+    }
+  }
+}
+
+.button-cta-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: rem(247px);
+  height: 100%;
+  max-height: rem(56px);
+  font-size: rem(18px);
+  font-weight: 500;
+  margin: rem(6px);
+  padding: rem($padding-xs) rem($padding-sm);
+  border-radius: rem($radius-xl);
+  color: $neutral-bg-primary;
+  background:
+    linear-gradient(0deg, $primary, $primary),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 53.57%,
+      rgba(255, 255, 255, 0.2) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+
+  transition: background 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: rem($radius-md);
+    pointer-events: none;
+
+    background: radial-gradient(
+      110px 88px at 50% 55%,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.06) 35%,
+      rgba(255, 255, 255, 0) 75%
+    );
+  }
+}
+
+.image-wrapper {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+
+    right: 15%;
+    top: 35%;
+
+    width: rem(238px);
+    height: rem(238px);
+    border-radius: 50%;
+
+    background: rgba(255, 193, 7, 0.35);
+    filter: blur(130px);
+
+    opacity: 0.9;
+
+    z-index: 0;
+  }
+}

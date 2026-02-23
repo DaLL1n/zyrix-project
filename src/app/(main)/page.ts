@@ -1,2 +1,2 @@
-import { HomePage } from '@/views/Home/ui/HomePage';
+import { HomePage } from '@/views/Home';
 export default HomePage;
