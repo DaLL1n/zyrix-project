@@ -1,20 +1,17 @@
-@use '../../../shared/styles/index' as *;
+@use '../../../../shared/styles/index' as *;
 
 .hero {
-  height: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
+  min-height: calc(100vh - rem(104px));
 }
 
 .wrapper {
   display: flex;
-  justify-content: flex-end;
+  margin-bottom: rem(32px);
 }
 
 .content {
   padding-top: rem(100px);
-
-  max-width: rem(651px);
+  max-width: rem(638px);
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -153,19 +150,14 @@
   &::before {
     content: '';
     position: absolute;
-
     right: 15%;
     top: 35%;
-
     width: rem(238px);
     height: rem(238px);
     border-radius: 50%;
-
     background: rgba(255, 193, 7, 0.35);
     filter: blur(130px);
-
     opacity: 0.9;
-
     z-index: 0;
   }
 }
