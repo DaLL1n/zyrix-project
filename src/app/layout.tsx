@@ -12,7 +12,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: 'Zyrix',
-  description: 'Zyrix',
+  description: 'Zyrix - The Future of Decentralized Finance',
 };
 
 const Layout = ({
