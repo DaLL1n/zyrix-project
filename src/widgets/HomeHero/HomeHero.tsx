@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import { Button } from '@/shared/ui';
 import { PATHS } from '@/shared/config';
-import globeIllustration from './assets/globe.svg';
-import { HeroStats } from './HeroStats/HeroStats';
-import styles from './Hero.module.scss';
+import { Stats } from './components/Stats/Stats';
+import styles from './HomeHero.module.scss';
 
-export const Hero = () => {
+export const HomeHero = () => {
   return (
     <section className={styles['hero']} role="hero">
       <div className="container">
@@ -30,7 +29,7 @@ export const Hero = () => {
           <div className={styles['image-wrapper']}>
             <Image
               className={styles['image']}
-              src={globeIllustration}
+              src="/images/home/globe.svg"
               alt="Globe illustration"
               width={586}
               height={560}
@@ -38,7 +37,7 @@ export const Hero = () => {
             />
           </div>
         </div>
-        <HeroStats />
+        <Stats />
       </div>
     </section>
   );

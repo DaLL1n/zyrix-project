@@ -1,9 +1,8 @@
-@use '../../../../../shared/styles/index' as *;
+@use '../../../../shared/styles/index.scss' as *;
 
 .stats {
   width: 100%;
   max-width: rem(1224px);
-  margin: 0 auto;
   background-color: #1c1c1c;
   border-radius: rem($radius-xl);
 }

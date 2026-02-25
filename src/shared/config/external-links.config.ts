@@ -1,3 +1,4 @@
+//конфиг для внешних ссылок
 export const EXTERNAL_LINKS = {
   INSTAGRAM: 'https://www.instagram.com/zyrixexchange/',
   FACEBOOK: 'https://www.facebook.com/zyrixexchange',

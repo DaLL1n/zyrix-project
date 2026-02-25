@@ -1,7 +1,10 @@
-@use '../../../../shared/styles/index' as *;
+@use '../../shared/styles/index.scss' as *;
 
 .hero {
-  min-height: calc(100vh - rem(104px));
+  min-height: calc(100vh - rem(204px));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .wrapper {
@@ -150,10 +153,10 @@
   &::before {
     content: '';
     position: absolute;
-    right: 15%;
-    top: 35%;
-    width: rem(238px);
-    height: rem(238px);
+    right: 25%;
+    top: 40%;
+    width: rem(200px);
+    height: rem(200px);
     border-radius: 50%;
     background: rgba(255, 193, 7, 0.35);
     filter: blur(130px);

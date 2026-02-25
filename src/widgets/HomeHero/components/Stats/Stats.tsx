@@ -1,6 +1,6 @@
-import styles from './HeroStats.module.scss';
+import styles from './Stats.module.scss';
 
-export const HeroStats = () => {
+export const Stats = () => {
   return (
     <div className={styles['stats']} aria-label="Platform statistics">
       <div className={styles['wrapper']}>

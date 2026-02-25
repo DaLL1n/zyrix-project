@@ -1,9 +1,11 @@
-import { Hero } from './Hero/Hero';
+import { HomeFeatures } from '@/widgets/HomeFeatures';
+import { HomeHero } from '@/widgets/HomeHero';
 
 export const HomePage = () => {
   return (
     <>
-      <Hero />
+      <HomeHero />
+      <HomeFeatures />
     </>
   );
 };
