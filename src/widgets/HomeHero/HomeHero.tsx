@@ -33,7 +33,8 @@ export const HomeHero = () => {
               alt="Globe illustration"
               width={586}
               height={560}
-              priority
+              preload
+              loading="eager"
             />
           </div>
         </div>
