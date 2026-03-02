@@ -1,0 +1,51 @@
+@use '../../styles/index.scss' as *;
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: rem($space-md);
+  background-color: $table-bg;
+  border-radius: rem($radius-xl);
+  padding: rem($space-lg);
+  min-height: rem(368px);
+}
+
+.top {
+  border-bottom: rem(1px) solid $neutral-divider;
+  padding-bottom: rem($padding-sm);
+}
+
+.headers {
+  gap: rem($space-2xl);
+  justify-content: space-between;
+  padding-left: rem($padding-3xl);
+  display: grid;
+  grid-template-columns: var(--table-grid);
+}
+
+.header-cell {
+  display: flex;
+  align-items: center;
+
+  &:first-child {
+    .column-header {
+      font-weight: 400;
+      font-size: rem($head8-size);
+    }
+  }
+}
+
+.column-header {
+  font-weight: 600;
+  font-size: rem($head7-size);
+  color: $neutral-text-secondary;
+}
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: rem($space-lg);
+}

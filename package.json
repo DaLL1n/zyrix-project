@@ -22,12 +22,16 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
+    "chart.js": "^4.5.1",
     "clsx": "^2.1.1",
     "next": "latest",
     "react": "^19.2.4",
+    "react-chartjs-2": "^5.3.1",
     "react-dom": "^19.2.4",
+    "react-is": "^19.2.4",
     "react-redux": "^9.2.0",
-    "sass": "^1.97.3"
+    "sass": "^1.97.3",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",

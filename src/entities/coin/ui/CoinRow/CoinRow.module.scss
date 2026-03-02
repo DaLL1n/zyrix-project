@@ -1,0 +1,58 @@
+@use '../../../../shared/styles/index.scss' as *;
+
+.link {
+  gap: rem($space-2xl);
+  padding-left: var(--row-padding);
+  border-radius: rem($radius-lg);
+  justify-content: space-between;
+  display: grid;
+  grid-template-columns: var(--table-grid);
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: $neutral-bg-primary;
+  }
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  gap: rem(4px);
+  font-size: rem($body3-size);
+  font-weight: 500;
+}
+
+.cell-position {
+  font-size: rem($body3-size);
+  font-weight: 600;
+}
+
+.coin-image {
+  width: rem(32px);
+  height: rem(32px);
+  border-radius: 50%;
+  margin-right: rem(4px);
+}
+
+.symbol {
+  font-weight: 400;
+  font-size: rem(10px);
+  color: $neutral-text-secondary;
+  text-transform: uppercase;
+}
+
+.price {
+  font-weight: 400;
+}
+
+.positive {
+  color: $success-dark-1;
+}
+
+.negative {
+  color: $error-dark-1;
+}
+
+.trade {
+  color: $primary;
+}

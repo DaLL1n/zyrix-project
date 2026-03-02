@@ -1,0 +1,12 @@
+@use '../../../shared/styles/index.scss' as *;
+
+.trending {
+  --table-grid: 18px repeat(2, minmax(0, 1fr)) repeat(3, minmax(0, 150px));
+  --row-padding: 56px;
+}
+
+.title {
+  font-size: rem($head4-size);
+  font-weight: 500;
+  margin: 0 0 rem($space-lg);
+}
