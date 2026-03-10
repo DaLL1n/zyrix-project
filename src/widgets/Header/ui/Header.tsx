@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { Button, Icon } from '@/shared/ui';
 import { HEADER_NAV_ITEMS } from '../model/constants';
-import { HeaderUtilityActions } from './HeaderUtilityActions/HeaderUtilityActions';
-import { HeaderNavMenu } from './HeaderNavMenu/HeaderNavMenu.client';
+import { UtilityActions } from './UtilityActions/UtilityActions.client';
+import { HeaderNavMenu } from './NavMenu/NavMenu.client';
 import styles from './Header.module.scss';
 
 export const Header = () => {
@@ -26,7 +26,7 @@ export const Header = () => {
           <HeaderNavMenu />
         </div>
         <div className={styles['actions']}>
-          <HeaderUtilityActions />
+          <UtilityActions />
           <div className={styles['auth-actions']}>
             <Button className={styles['auth-link']} href="/signup">
               Sign up

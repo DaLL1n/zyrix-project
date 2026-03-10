@@ -1,0 +1,18 @@
+@use '../../../../shared/styles/index' as *;
+
+.utility-actions {
+  display: flex;
+  align-items: center;
+  gap: rem($space-lg);
+  position: relative;
+}
+
+.button-search,
+.button-language {
+  transition: color 0.3s;
+
+  &:is(:focus-visible, :hover) {
+    outline: none;
+    color: $primary;
+  }
+}

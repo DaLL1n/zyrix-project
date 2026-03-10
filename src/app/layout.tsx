@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 
 import './styles/globals.scss';
+import { StoreProvider } from './providers/StoreProvider';
 
 const poppins = Poppins({
   variable: '--font-poppins',
@@ -22,7 +23,9 @@ const Layout = ({
 }>) => {
   return (
     <html lang="en">
-      <body className={`${poppins.variable}`}>{children}</body>
+      <body className={`${poppins.variable}`}>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 };

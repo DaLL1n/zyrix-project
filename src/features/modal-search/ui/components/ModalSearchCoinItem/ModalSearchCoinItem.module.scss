@@ -1,0 +1,102 @@
+@use '../../../../../shared/styles/index' as *;
+
+.coin-item {
+  position: relative;
+}
+
+.coin-link {
+  display: grid;
+  align-items: center;
+  grid-template-columns: minmax(0, rem(180px)) repeat(2, auto);
+  gap: rem($space-xs);
+  font-size: rem($body3-size);
+  font-weight: 400;
+  color: $neutral-title;
+  min-height: rem(40px);
+  border-radius: rem($radius-xl);
+  margin: 0 rem(-1px) 0 rem(-4px);
+  padding: 0 rem(1px) 0 rem(4px);
+  position: relative;
+
+  &:is(:focus-visible, :hover) {
+    outline: none;
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &::after {
+    content: '';
+    opacity: 0;
+    z-index: -1;
+    background-color: #141414;
+    border-radius: rem($radius-xl);
+    width: calc(100% + 12px);
+    height: 100%;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.coin-label {
+  display: flex;
+  align-items: center;
+  gap: rem($space-xs);
+  text-transform: uppercase;
+}
+
+.coin-icon {
+  border-radius: 50%;
+}
+
+.price {
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+.price-change {
+  font-variant-numeric: tabular-nums;
+  padding-right: rem(26px);
+  text-align: right;
+}
+
+.positive {
+  color: $success-dark-1;
+}
+
+.negative {
+  color: $error-dark-1;
+}
+
+.favorite-button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 101;
+  width: rem(24px);
+  height: rem(24px);
+
+  &:is(:focus-visible, :hover) {
+    outline: none;
+    .favorite-icon {
+      display: none;
+    }
+
+    .favorite-icon-filled {
+      display: block;
+    }
+  }
+}
+
+.favorite-icon {
+  color: $primary;
+}
+
+.favorite-icon-filled {
+  display: none;
+  color: $primary;
+}

@@ -7,4 +7,8 @@ export type IconName =
   | 'instagram'
   | 'linkedin'
   | 'telegram'
-  | 'twitter';
+  | 'twitter'
+  | 'favorite-star'
+  | 'favorite-star-filled'
+  | 'loader'
+  | 'no-data';

@@ -1,10 +1,12 @@
 import z from 'zod';
+import { COIN_GECKO_API_URL } from '@/shared/config';
 import { coinsTrendResponseSchema, type Coin } from '../model/schemas';
+import { validateWithZod } from '@/shared/lib';
 
 export const getTrendCoin = async (): Promise<Coin[]> => {
   try {
     const response = await fetch(
-      `${process.env.COINGECKO_API_URL}/coins/markets?vs_currency=usd&price_change_percentage=24h&per_page=5&sparkline=true&include_tokens=top&precision=2&sparkline=true&precision=3`,
+      `${COIN_GECKO_API_URL}/coins/markets?vs_currency=usd&price_change_percentage=24h&per_page=5&sparkline=true&include_tokens=top&precision=3`,
     );
 
     if (!response.ok) {
@@ -12,7 +14,7 @@ export const getTrendCoin = async (): Promise<Coin[]> => {
     }
     const data = await response.json();
 
-    return coinsTrendResponseSchema.parse(data);
+    return validateWithZod(coinsTrendResponseSchema, data);
   } catch (error) {
     if (error instanceof z.ZodError) {
       console.error(
