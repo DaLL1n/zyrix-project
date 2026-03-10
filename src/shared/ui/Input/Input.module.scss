@@ -1,0 +1,28 @@
+@use '../../styles/index.scss' as *;
+
+.label {
+  width: 100%;
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid transparent;
+  padding: 0;
+  background-color: $neutral-divider;
+  border-radius: rem($radius-xl);
+  color: $neutral-text-secondary;
+  transition:
+    border-color 0.3s,
+    padding 0.3s;
+
+  &::placeholder {
+    color: #6f6f6f;
+  }
+
+  &:is(:focus-visible, :hover) {
+    outline: none;
+    border-color: $primary;
+  }
+}

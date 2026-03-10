@@ -5,6 +5,21 @@
   max-width: rem(1224px);
   background-color: #1c1c1c;
   border-radius: rem($radius-xl);
+
+  position: relative;
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    background-color: inherit;
+    border-radius: rem($radius-xl);
+    filter: blur(4px);
+    z-index: -1;
+    opacity: 0.8;
+  }
 }
 
 .wrapper {

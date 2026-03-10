@@ -1,8 +1,7 @@
 import Link from 'next/link';
-
 import clsx from 'clsx';
-
 import styles from './Button.module.scss';
+
 import type {
   ButtonLinkProps,
   ButtonNativeProps,

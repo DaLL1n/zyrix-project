@@ -1,11 +1,11 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { NavMenu } from '@/shared/ui';
 import { HEADER_NAV_ITEMS } from '../../model/constants';
-import styles from './HeaderNavMenu.module.scss';
+import styles from './NavMenu.module.scss';
 
 export const HeaderNavMenu = () => {
   const pathname = usePathname();

@@ -31,7 +31,7 @@ export const CoinRow = ({ className, coin, index }: CoinRowProps) => {
   const { price } = sparkline_in_7d;
 
   const { priceChange, cellClass } = formatPriceChange(
-    price_change_percentage_24h,
+    price_change_percentage_24h ?? 0,
   );
 
   return (

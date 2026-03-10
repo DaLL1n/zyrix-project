@@ -3,9 +3,11 @@ export { getTrendCoin } from './api/getTrendCoin';
 
 //model
 export { coinSchema, type Coin } from './model/schemas';
+export type { SearchCoin } from './model/search.types';
 
 //lib
 export { formatPriceChange } from './lib/formatPriceChange';
+export { normalizeNestedResponse } from './lib/normalizeNestedResponse';
 
 //ui
 export { SparklineTrend } from './ui/SparklineTrend/SparklineTrend';
