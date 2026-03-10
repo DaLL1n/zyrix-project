@@ -8,3 +8,6 @@ export type {
   ExternalLinkKey,
   ExternalLinkValue,
 } from './external-links.config';
+
+// coin-gecko.config.ts
+export { COIN_GECKO_API_URL } from './coin-gecko.config';

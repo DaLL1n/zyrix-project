@@ -1,3 +1,4 @@
+import { COIN_GECKO_API_URL } from '@/shared/config';
 import { NextResponse } from 'next/server';
 
 export const GET = async (request: Request) => {
@@ -19,7 +20,7 @@ export const GET = async (request: Request) => {
   try {
     // 1. Ищем монеты (текстовый поиск)
     const searchRes = await fetch(
-      `https://api.coingecko.com/api/v3/search?query=${query}`,
+      `${COIN_GECKO_API_URL}/search?query=${query}`,
       { headers },
     );
     if (!searchRes.ok) throw new Error('Search failed');
@@ -38,7 +39,7 @@ export const GET = async (request: Request) => {
 
     // 3. Запрашиваем полные рыночные данные по этим ID (включая sparkline и цены)
     const marketsRes = await fetch(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${topCoinIds}&price_change_percentage=24h`,
+      `${COIN_GECKO_API_URL}/coins/markets?vs_currency=usd&ids=${topCoinIds}&price_change_percentage=24h`,
       { headers },
     );
     if (!marketsRes.ok) throw new Error('Markets fetch failed');
