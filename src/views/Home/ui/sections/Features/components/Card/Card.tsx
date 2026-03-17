@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import type { CardData } from '../../../model/types';
+import type { CardData } from '../../types';
 import styles from './Card.module.scss';
 
 type CardProps = { data: CardData[number] };

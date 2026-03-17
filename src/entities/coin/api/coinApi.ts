@@ -4,7 +4,7 @@ import { coinsSearchSchema, coinTopSearchSchema } from '../model/schemas';
 import { normalizeNestedResponse } from '../lib/normalizeNestedResponse';
 import type { SearchCoin } from '../model/search.types';
 
-const coinApi = baseApi.injectEndpoints({
+export const coinApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getTopSearch: build.query<SearchCoin[], void>({
       query: () => '/coins/search/trending',

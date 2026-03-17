@@ -1,0 +1,155 @@
+@use '../../styles/index.scss' as *;
+
+// default / closed
+.accordion {
+  position: relative;
+  background: linear-gradient(90deg, #1e1e1e 0%, rgba(25, 25, 25, 0) 99.99%);
+  border: 1px solid transparent;
+  border-radius: rem($radius-xl);
+  transition:
+    border-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+
+    transition: opacity 0.2s ease;
+  }
+
+  &::before {
+    opacity: 1;
+    background: linear-gradient(
+      90deg,
+      rgba(153, 153, 153, 1) 0%,
+      rgba(153, 153, 153, 1) 72%,
+      rgba(51, 51, 51, 0) 100%
+    );
+  }
+
+  &::after {
+    opacity: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 193, 7, 0.45) 0%,
+      rgba(255, 193, 7, 0.45) 72%,
+      rgba(255, 193, 7, 0) 100%
+    );
+  }
+
+  &:not(.open):is(:hover, :focus-visible) {
+    outline: none;
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+.header {
+  margin: 0;
+  width: 100%;
+}
+
+.button-trigger {
+  justify-content: space-between;
+  width: 100%;
+  padding: rem($padding-lg);
+  transition: padding-bottom 0.3s ease-in-out;
+
+  &:focus-visible {
+    outline: 2px solid #ffc107;
+    outline-offset: 4px;
+    border-radius: rem($radius-xl);
+  }
+}
+
+.question {
+  margin: 0;
+  font-weight: 500;
+  font-size: rem(22px);
+  color: $neutral-title;
+}
+
+.body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition:
+    grid-template-rows 0.3s ease-in-out,
+    padding 0.3s ease-in-out;
+}
+
+.content {
+  min-height: 0;
+  overflow: hidden;
+  border-top: 0.5px solid transparent;
+  margin: 0;
+  padding-top: 0;
+  font-size: rem($body4-size);
+  color: $neutral-text-secondary;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    padding-top 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.icon-arrow {
+  flex-shrink: 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+// Стили для открытого аккордеона
+.open {
+  border-color: #fff9e6;
+  background: transparent;
+
+  .button-trigger {
+    padding-bottom: rem($padding-sm);
+  }
+
+  .body {
+    grid-template-rows: 1fr;
+    padding: 0 rem($padding-lg) rem($padding-lg) rem($padding-lg);
+  }
+
+  .content {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: #353945;
+    padding-top: rem($padding-sm);
+  }
+
+  .icon-arrow {
+    transform: rotate(180deg);
+  }
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 1px rgba(255, 249, 230, 0.12);
+  }
+}

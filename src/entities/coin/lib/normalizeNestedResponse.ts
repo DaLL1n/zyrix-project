@@ -1,7 +1,7 @@
 import type {
   CoinTopSearchResponse,
   CoinsSearchResponse,
-} from '@/entities/coin/model/schemas';
+} from '../model/schemas';
 import type { SearchCoin } from '@/entities/coin';
 
 type TopSearchCoin = CoinTopSearchResponse['coins'][number];

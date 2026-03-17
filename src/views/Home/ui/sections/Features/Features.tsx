@@ -1,8 +1,8 @@
-import { CARD_DATA } from '../model/constants';
+import { CARD_DATA } from './constants';
 import { Card } from './components/Card/Card';
-import styles from './HomeFeatures.module.scss';
+import styles from './Features.module.scss';
 
-export const HomeFeatures = () => {
+export const Features = () => {
   return (
     <section className={styles['features']}>
       <div className="container">

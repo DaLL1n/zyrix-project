@@ -1,9 +1,6 @@
-import {
-  useGetSearchCoinsQuery,
-  useGetTopSearchQuery,
-} from '@/entities/coin/api/coinApi';
 import { useState } from 'react';
 import { useDebounce } from '@/shared/lib/hooks';
+import { useGetSearchCoinsQuery, useGetTopSearchQuery } from '@/entities/coin';
 
 const MIN_SEARCH_LENGTH = 2;
 

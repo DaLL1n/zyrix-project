@@ -2,10 +2,10 @@ import { Suspense } from 'react';
 
 import { CoinTable } from '@/entities/coin';
 import { TrendTableBody } from './components/TrendTableBody/TrendTableBody';
-import { HEADERS_TABLE } from '../model/constants';
-import styles from './HomeTrending.module.scss';
+import { HEADERS_TABLE } from './constants';
+import styles from './Trending.module.scss';
 
-export const HomeTrending = () => {
+export const Trending = () => {
   return (
     <section className={styles['trending']}>
       <div className="container">

@@ -1,8 +1,9 @@
-@use '../../../shared/styles/index.scss' as *;
+@use '@/shared/styles/_index.scss' as *;
 
 .trending {
   --table-grid: 18px repeat(2, minmax(0, 1fr)) repeat(3, minmax(0, 150px));
   --row-padding: 56px;
+  margin: 0 0 rem(100px);
 }
 
 .title {
