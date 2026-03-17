@@ -62,6 +62,7 @@ export const Accordion = ({
         id={contentId}
         role="region"
         aria-labelledby={buttonId}
+        aria-hidden={!isItemOpen}
       >
         <p className={styles['content']}>{item.answer}</p>
       </div>
