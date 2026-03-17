@@ -1,0 +1,10 @@
+@use '@/shared/styles/_index.scss' as *;
+
+.faq {
+  margin: 0 0 rem(100px);
+  &-title {
+    font-size: rem($head4-size);
+    margin: 0 0 rem($space-md);
+    font-weight: 500;
+  }
+}

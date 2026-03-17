@@ -1,5 +1,6 @@
 //api
 export { getTrendCoin } from './api/getTrendCoin';
+export { useGetTopSearchQuery, useGetSearchCoinsQuery } from './api/coinApi';
 
 //model
 export { coinSchema, type Coin } from './model/schemas';

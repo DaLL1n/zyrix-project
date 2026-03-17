@@ -1,0 +1,19 @@
+@use '@/shared/styles/_index.scss' as *;
+
+.accordion-list {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: rem($space-md);
+}
+
+.accordion-item {
+  max-width: rem(1124px);
+  width: 100%;
+
+  &:nth-child(odd) {
+    margin-left: auto;
+  }
+}

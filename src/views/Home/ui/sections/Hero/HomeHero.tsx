@@ -2,9 +2,9 @@ import Image from 'next/image';
 import { Button } from '@/shared/ui';
 import { PATHS } from '@/shared/config';
 import { Stats } from './components/Stats/Stats';
-import styles from './HomeHero.module.scss';
+import styles from './Hero.module.scss';
 
-export const HomeHero = () => {
+export const Hero = () => {
   return (
     <section className={styles['hero']} role="hero">
       <div className="container">

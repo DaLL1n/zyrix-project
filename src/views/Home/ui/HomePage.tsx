@@ -1,13 +1,15 @@
-import { HomeFeatures } from '@/widgets/HomeFeatures';
-import { HomeHero } from '@/widgets/HomeHero';
-import { HomeTrending } from '@/widgets/HomeTrending';
+import { Hero } from './sections/Hero/HomeHero';
+import { Features } from './sections/Features/Features';
+import { Trending } from './sections/Trending/Trending';
+import { Faq } from './sections/Faq/Faq';
 
 export const HomePage = () => {
   return (
     <>
-      <HomeHero />
-      <HomeFeatures />
-      <HomeTrending />
+      <Hero />
+      <Features />
+      <Trending />
+      <Faq />
     </>
   );
 };

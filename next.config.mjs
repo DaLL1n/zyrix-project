@@ -1,3 +1,6 @@
+import path from 'path';
+import process from 'process';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -10,6 +13,9 @@ const nextConfig = {
       },
     ],
     qualities: [75, 100],
+  },
+  sassOptions: {
+    includePaths: [path.join(process.cwd(), 'src')],
   },
 };
 

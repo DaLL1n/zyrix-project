@@ -1,7 +1,5 @@
 import clsx from 'clsx';
-
 import type { IconName } from './Icon.types';
-
 import styles from './Icon.module.scss';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
