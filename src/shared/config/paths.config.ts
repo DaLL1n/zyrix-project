@@ -17,6 +17,8 @@ export const PATHS = {
   HELP_CENTER: '/help-center',
   CONTACT_US: '/contact-us',
   STATUS: '/status',
+  REGISTER: '/register',
+  LOGIN: '/login',
 } as const;
 
 export type AppPathKey = keyof typeof PATHS;

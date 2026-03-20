@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import { StoreProvider } from './providers/StoreProvider';
 
 import './styles/globals.scss';
-import { StoreProvider } from './providers/StoreProvider';
+import '@/shared/ui/Button/Button.module.scss';
+import '@/shared/ui/Input/Input.module.scss';
 
 const poppins = Poppins({
   variable: '--font-poppins',

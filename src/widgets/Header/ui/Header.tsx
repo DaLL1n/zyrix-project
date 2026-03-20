@@ -4,6 +4,7 @@ import { HEADER_NAV_ITEMS } from '../model/constants';
 import { UtilityActions } from './UtilityActions/UtilityActions.client';
 import { HeaderNavMenu } from './NavMenu/NavMenu.client';
 import styles from './Header.module.scss';
+import { PATHS } from '@/shared/config';
 
 export const Header = () => {
   return (
@@ -28,12 +29,12 @@ export const Header = () => {
         <div className={styles['actions']}>
           <UtilityActions />
           <div className={styles['auth-actions']}>
-            <Button className={styles['auth-link']} href="/signup">
+            <Button className={styles['auth-link']} href={PATHS.REGISTER}>
               Sign up
             </Button>
             <Button
               className={styles['auth-link']}
-              href="/login"
+              href={PATHS.LOGIN}
               variant="secondary"
             >
               Log in

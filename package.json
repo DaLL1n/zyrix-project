@@ -21,6 +21,8 @@
     ]
   },
   "dependencies": {
+    "@conform-to/react": "^1.17.1",
+    "@conform-to/zod": "^1.17.1",
     "@reduxjs/toolkit": "^2.11.2",
     "chart.js": "^4.5.1",
     "clsx": "^2.1.1",
@@ -31,7 +33,7 @@
     "react-is": "^19.2.4",
     "react-redux": "^9.2.0",
     "sass": "^1.97.3",
-    "zod": "^4.3.6"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",

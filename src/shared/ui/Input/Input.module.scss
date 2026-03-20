@@ -17,12 +17,41 @@
     border-color 0.3s,
     padding 0.3s;
 
-  &::placeholder {
-    color: #6f6f6f;
-  }
-
   &:is(:focus-visible, :hover) {
     outline: none;
     border-color: $primary;
+  }
+
+  &-error {
+    border-color: $error-dark-1;
+
+    &:is(:focus-visible, :hover) {
+      outline: none;
+      border-color: $error-dark-1;
+    }
+  }
+
+  &-success {
+    border-color: $success-dark-1;
+
+    &:is(:focus-visible, :hover) {
+      outline: none;
+      border-color: $success-dark-1;
+    }
+  }
+}
+
+.text-error {
+  opacity: 0;
+  color: $error-dark-1;
+  font-size: rem($body4-size);
+  font-weight: 500;
+  position: absolute;
+  left: rem(24px);
+  bottom: rem(-22px);
+  transition: opacity 0.3s;
+
+  &-visible {
+    opacity: 1;
   }
 }

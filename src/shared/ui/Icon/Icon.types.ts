@@ -12,4 +12,6 @@ export type IconName =
   | 'favorite-star-filled'
   | 'loader'
   | 'no-data'
-  | 'faq-arrow';
+  | 'faq-arrow'
+  | 'eye-open'
+  | 'eye-closed';
