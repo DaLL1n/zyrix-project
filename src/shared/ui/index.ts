@@ -6,6 +6,8 @@ export { Table } from './Table/Table';
 export { Input } from './Input/Input';
 export { Loader } from './Loader/Loader';
 export { Accordion } from './Accordion/Accordion';
+export { AuthFormLayout } from './AuthFormLayout/AuthFormLayout';
+export { InputPassword } from './InputPassword/InputPassword.client';
 
 // types
 export type { IconName } from './Icon/Icon.types';

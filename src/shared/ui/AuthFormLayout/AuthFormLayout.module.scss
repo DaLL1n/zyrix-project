@@ -1,0 +1,48 @@
+@use '../../styles/index' as *;
+
+.auth-form-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: rem(600px);
+}
+
+.logo-link {
+  margin: 0 auto rem(64px);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: rem(40px);
+  margin-bottom: rem(16px);
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: rem($space-lg);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.submit-button {
+  padding: rem(14px);
+  min-height: rem(56px);
+  font-weight: 500;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: rem($space-xs);
+  margin: 0;
+  font-size: rem($body4-size);
+  color: $neutral-text-secondary;
+}
+
+.navigation-link {
+  font-size: rem($body3-size);
+  color: $neutral-title;
+}

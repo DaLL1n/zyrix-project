@@ -1,0 +1,15 @@
+@use '@/shared/styles/index' as *;
+
+.input-wrapper {
+  position: relative;
+}
+
+.input {
+  padding: rem(14px) rem($padding-md);
+  color: $neutral-text-secondary;
+  min-height: rem(56px);
+
+  &::placeholder {
+    color: $neutral-text-secondary;
+  }
+}
