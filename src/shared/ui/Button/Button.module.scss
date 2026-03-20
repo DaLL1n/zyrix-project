@@ -9,6 +9,11 @@
   background-color: transparent;
   padding: 0;
   border-radius: rem($radius-xl);
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #997404;
+  }
 }
 
 .primary {

@@ -22,6 +22,12 @@
     border-color: $primary;
   }
 
+  &:-webkit-autofill {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: $neutral-text-secondary;
+    box-shadow: inset 0 0 0 50px $neutral-divider;
+  }
+
   &-error {
     border-color: $error-dark-1;
 

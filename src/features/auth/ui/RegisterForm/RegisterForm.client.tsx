@@ -1,38 +1,19 @@
 'use client';
 
-import { useActionState, useCallback, useState } from 'react';
-import { useForm } from '@conform-to/react';
-import { parseWithZod } from '@conform-to/zod';
+import { useCallback, useState } from 'react';
 import { AuthFormLayout, Input, InputPassword } from '@/shared/ui';
 import { PATHS } from '@/shared/config';
-import { authAction } from '../../api/authAction.server';
-import { registerSchema } from '../../model/auth.schemas';
+import { useRegisterForm } from '../../model/useRegisterForm';
 import { REGISTER_FORM_CONTENT, REGISTER_FORM_FIELDS } from './constants';
 import styles from './RegisterForm.module.scss';
 
 /**
  * Форма регистрации с клиентской и серверной валидацией (Progressive Enhancement).
  * Использует '@conform-to/react' для управления состоянием и 'useActionState' для обработки Server Actions.
- *
- * @returns {JSX.Element}
  */
 export const RegisterForm = () => {
   const [showPasswords, setShowPasswords] = useState(false);
-
-  // Привязываем тип 'register' аргументом к универсальному Server Action
-  const registerAction = authAction.bind(null, 'register');
-  const [state, formAction] = useActionState(registerAction, undefined);
-
-  const [form, fields] = useForm({
-    lastResult: state,
-    onValidate({ formData }) {
-      return parseWithZod(formData, { schema: registerSchema });
-    },
-    // Валидация срабатывает сразу при вводе для мгновенного фидбека
-    shouldValidate: 'onInput',
-    shouldRevalidate: 'onInput',
-  });
-
+  const { form, fields, isReadyToSubmit, formAction } = useRegisterForm();
   const toggleShowPasswords = useCallback(() => {
     setShowPasswords((prev) => !prev);
   }, []);
@@ -43,6 +24,7 @@ export const RegisterForm = () => {
       action={formAction}
       onSubmit={form.onSubmit}
       buttonText={REGISTER_FORM_CONTENT.buttonText}
+      isSubmitDisabled={!isReadyToSubmit}
       footerText={REGISTER_FORM_CONTENT.footerText}
       footerLinkText={REGISTER_FORM_CONTENT.footerLink}
       footerLinkHref={PATHS.LOGIN}

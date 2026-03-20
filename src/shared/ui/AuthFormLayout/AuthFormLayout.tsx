@@ -10,6 +10,7 @@ type AuthFormLayoutProps = {
   onSubmit?: (event: SubmitEvent<HTMLFormElement>) => void;
   action: (payload: FormData) => void;
   buttonText: string;
+  isSubmitDisabled?: boolean;
   footerText?: string;
   footerLinkText?: string;
   footerLinkHref?: string;
@@ -21,6 +22,7 @@ export const AuthFormLayout = ({
   onSubmit,
   action,
   buttonText,
+  isSubmitDisabled,
   footerText,
   footerLinkText,
   footerLinkHref,
@@ -38,7 +40,11 @@ export const AuthFormLayout = ({
         noValidate
       >
         <fieldset className={styles['fieldset']}>{children}</fieldset>
-        <Button className={styles['submit-button']} type="submit">
+        <Button
+          className={styles['submit-button']}
+          type="submit"
+          disabled={isSubmitDisabled}
+        >
           {buttonText}
         </Button>
       </form>
