@@ -16,7 +16,9 @@ export const Input = ({
   isValid,
   ...props
 }: InputProps) => {
-  const inputId = useId();
+  const inputId = props.id ?? useId();
+  const errorId = `${inputId}-error`;
+
   const inputClass = clsx(styles['input'], className, {
     [styles['input-error']]: error,
     [styles['input-success']]: !error && isValid,
@@ -28,15 +30,16 @@ export const Input = ({
   return (
     <>
       <label className={styles['label']} htmlFor={inputId}>
-        <input className={inputClass} id={inputId} {...props} />
+        <input
+          className={inputClass}
+          id={inputId}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? errorId : props['aria-describedby']}
+          {...props}
+        />
         {icon}
       </label>
-      <span
-        className={textErrorClass}
-        aria-errormessage={error ? inputId : undefined}
-        aria-hidden={!error}
-        role="alert"
-      >
+      <span className={textErrorClass} id={errorId} role="alert">
         {error}
       </span>
     </>

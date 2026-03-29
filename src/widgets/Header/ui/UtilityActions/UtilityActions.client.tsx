@@ -28,7 +28,7 @@ export const UtilityActions = () => {
         />
       </Button>
       {isOpenModalSearch && (
-        <ModalSearch onClose={() => setIsOpenModalSearch(false)} />
+        <ModalSearch onCloseAction={() => setIsOpenModalSearch(false)} />
       )}
       <Button className={styles['button-language']} variant="iconOnly">
         <Icon

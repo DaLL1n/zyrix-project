@@ -1,40 +1,53 @@
-import type { InputHTMLAttributes } from 'react';
-
-type FieldName =
-  | 'firstName'
-  | 'lastName'
-  | 'email'
-  | 'password'
-  | 'confirmPassword';
-
-type RegisterFormField = Omit<InputHTMLAttributes<HTMLInputElement>, 'name'> & {
-  name: FieldName;
-};
+import type z from 'zod';
+import type { registerSchema } from '../../model/auth.schemas';
 
 export const REGISTER_FORM_CONTENT = {
   buttonText: 'Sign Up to your account',
   footerText: 'Already have an account?',
   footerLink: 'Log In',
+  checkboxText:
+    'By creating an account, I agree to Zyrix’s Terms and Privacy Policy',
 } as const;
 
-export const REGISTER_FORM_FIELDS: RegisterFormField[] = [
+////////////////////////////////////////////////////////////////////////////////
+
+type FieldName = keyof z.infer<typeof registerSchema>;
+
+type RegisterFieldType = 'text' | 'email' | 'password';
+
+type RegisterFormField = {
+  name: FieldName;
+  type: RegisterFieldType;
+  placeholder: string;
+  autoComplete: string;
+  'aria-autocomplete': 'inline' | 'list' | 'both' | 'none';
+  'aria-label': string;
+};
+
+export const REGISTER_FORM_FIELDS = [
   {
-    name: 'firstName',
+    name: 'name',
     type: 'text',
-    placeholder: 'First Name',
+    placeholder: 'Name',
     autoComplete: 'given-name',
+    'aria-autocomplete': 'none',
+    'aria-label': 'Name',
   },
   {
-    name: 'lastName',
+    name: 'surname',
     type: 'text',
-    placeholder: 'Last Name',
+    placeholder: 'Surname',
     autoComplete: 'family-name',
+    'aria-autocomplete': 'none',
+    'aria-label': 'Surname',
   },
   {
     name: 'email',
     type: 'email',
     placeholder: 'Email address',
     autoComplete: 'email',
+    'aria-autocomplete': 'none',
+    'aria-label': 'Email address',
   },
   {
     name: 'password',
@@ -42,6 +55,7 @@ export const REGISTER_FORM_FIELDS: RegisterFormField[] = [
     placeholder: 'Password',
     autoComplete: 'new-password',
     'aria-autocomplete': 'list',
+    'aria-label': 'Password',
   },
   {
     name: 'confirmPassword',
@@ -49,5 +63,6 @@ export const REGISTER_FORM_FIELDS: RegisterFormField[] = [
     placeholder: 'Confirm password',
     autoComplete: 'new-password',
     'aria-autocomplete': 'list',
+    'aria-label': 'Confirm password',
   },
-] as const;
+] as const satisfies readonly RegisterFormField[];

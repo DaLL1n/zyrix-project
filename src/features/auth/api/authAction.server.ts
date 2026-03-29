@@ -19,5 +19,5 @@ export const authAction = async (
     return submission.reply();
   }
 
-  redirect('/dashboard');
+  redirect('/');
 };

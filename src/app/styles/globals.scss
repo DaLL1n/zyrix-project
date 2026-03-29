@@ -9,7 +9,16 @@
   box-sizing: border-box;
 }
 
-html {
+body {
+  background-color: $neutral-bg-primary;
+  color: $neutral-text-primary;
+  font-family: $font-family;
+  font-size: rem($body-base-size);
+  font-weight: $body-base-weight;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
   scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
@@ -29,17 +38,6 @@ html {
   &::-webkit-scrollbar-thumb:hover {
     background-color: $primary-dark-1;
   }
-}
-
-body {
-  background-color: $neutral-bg-primary;
-  color: $neutral-text-primary;
-  font-family: $font-family;
-  font-size: rem($body-base-size);
-  font-weight: $body-base-weight;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 main {
