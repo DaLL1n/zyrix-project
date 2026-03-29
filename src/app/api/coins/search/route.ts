@@ -31,9 +31,9 @@ export const GET = async (request: Request) => {
       return NextResponse.json({ coins: [] });
     }
 
-    // 2. Берем топ-5 ID
+    // 2. Берем топ-7 ID
     const topCoinIds = searchData.coins
-      .slice(0, 5)
+      .slice(0, 7)
       .map((coin: { id: string }) => coin.id)
       .join(',');
 

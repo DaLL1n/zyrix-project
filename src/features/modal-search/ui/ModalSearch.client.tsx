@@ -1,23 +1,23 @@
 'use client';
 
-import { useEffectEvent } from 'react';
-import { Button, Icon, Input, Loader } from '@/shared/ui';
 import { useEscapeKey, useScrollOutside } from '@/shared/lib/hooks';
+import { Button, Icon, Input, Loader } from '@/shared/ui';
+import { useEffectEvent } from 'react';
 import { useModalSearchCoins } from '../model/useModalSearchCoins';
 import { ModalSearchCoinItem } from './components/ModalSearchCoinItem/ModalSearchCoinItem';
 import styles from './ModalSearch.module.scss';
 
 type ModalSearchProps = {
-  onClose: () => void;
+  onCloseAction: () => void;
 };
 
-export const ModalSearch = ({ onClose }: ModalSearchProps) => {
+export const ModalSearch = ({ onCloseAction }: ModalSearchProps) => {
   const { coins, searchValue, setSearchValue, title, status, refetch } =
     useModalSearchCoins();
 
-  const closeModalEscape = useEffectEvent(onClose);
+  const closeModalEscape = useEffectEvent(onCloseAction);
   useEscapeKey(closeModalEscape);
-  useScrollOutside(() => onClose());
+  useScrollOutside(() => onCloseAction());
 
   const content = () => {
     switch (status) {

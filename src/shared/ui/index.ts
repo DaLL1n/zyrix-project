@@ -4,6 +4,7 @@ export { Button } from './Button/Button';
 export { SocialList } from './SocialList/SocialList';
 export { Table } from './Table/Table';
 export { Input } from './Input/Input';
+export { Checkbox } from './Checkbox/Checkbox';
 export { Loader } from './Loader/Loader';
 export { Accordion } from './Accordion/Accordion';
 export { AuthFormLayout } from './AuthFormLayout/AuthFormLayout';
