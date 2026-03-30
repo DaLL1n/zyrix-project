@@ -1,658 +1,345 @@
-# ✨ Zyrix — Crypto Currency Website
+# Zyrix
 
-> Next.js · React 19 · TypeScript · Redux Toolkit · SCSS Modules · FSD Architecture
+`Zyrix` — frontend криптоплатформы с маркетинговым landing page, пользовательским onboarding через регистрацию и market-search сценариями для работы с данными монет.  
+Проект показывает production-подход к разработке на `Next.js`: `App Router`, `Feature-Sliced Design`, `RTK Query`, `Zod`, BFF-роуты к `CoinGecko` и подготовленная интеграция с `Supabase`.
 
----
+<a id="toc"></a>
 
-## 📚 Содержание
+## 📚 Оглавление
 
-- [Стек технологий](#-стек-технологий)
-- [Правила кода](#-правила-кода)
+- [🧭 Что это за проект](#about)
+- [Маршруты, которые есть сейчас](#routes)
+- [🧱 Стек](#stack)
+- [🏗️ Архитектура](#architecture)
+- [Как устроен код](#architecture-layout)
+- [Что важно знать перед работой](#architecture-notes)
+- [🗂️ Структура проекта](#structure)
+- [Основные директории](#structure-dirs)
+- [🎨 Figma](#figma)
+- [📊 Статус реализации](#status)
+- [✅ Реализовано](#status-done)
+- [🔧 В процессе / частично](#status-partial)
+- [📋 Пока не реализовано](#status-planned)
+- [🚀 Установка и запуск](#setup)
+- [Требования](#setup-requirements)
+- [Быстрый старт](#setup-quickstart)
+- [🔐 Переменные окружения](#env)
+- [📜 Скрипты](#scripts)
+- [✅ Качество и проверки](#quality)
+- [📏 Стандарты проекта](#standards)
+- [⚠️ Ограничения и текущее поведение](#limitations)
 
----
+<a id="about"></a>
 
-## 🛠 Стек технологий
+## 🧭 Что это за проект
 
-| Технология           | Версия                  |
-| -------------------- | ----------------------- |
-| Next.js (App Router) | latest                  |
-| React                | ^18.2.0                 |
-| TypeScript           | ^5.3.3                  |
-| Redux Toolkit        | ^2.11.2                 |
-| SCSS Modules         | —                       |
-| Шрифт                | Poppins (400, 500, 600) |
+Проект закрывает три работающих сценария:
 
----
+- landing page с маркетинговыми секциями
+- страницу регистрации с клиентской и серверной валидацией
+- поиск и trending-выдачу монет через BFF-роуты
 
-## 📏 Правила кода
+Текущее состояние кода:
 
-<!-- ═══════════════════════════════════════════════════════ -->
+- UI собирается через `Next.js App Router`
+- структура проекта следует `FSD`
+- server-state работает через `RTK Query`
+- формы и внешние данные валидируются через `Zod`
+- в зависимостях подключен `Supabase`, но auth-flow на него пока не переведен
 
-<details>
-<summary><strong>1. Архитектура — Feature-Sliced Design (FSD)</strong></summary>
+<a id="routes"></a>
 
-### Слои (сверху вниз, зависимости только вниз):
+### Маршруты, которые есть сейчас
 
-```
-app → views → widgets → features → entities → shared
-```
+| Маршрут                      | Назначение                    |
+| ---------------------------- | ----------------------------- |
+| `/`                          | главная страница              |
+| `/register`                  | экран регистрации             |
+| `/api/coins/search`          | BFF-роут для поиска монет     |
+| `/api/coins/search/trending` | BFF-роут для trending-запроса |
 
-### ⚠️ Next.js App Router + FSD:
+<a id="stack"></a>
 
-В Next.js App Router **файловый роутинг** живёт в `src/app/`.  
-FSD-слой `views/` (вместо стандартного `pages/`) содержит компоненты страниц с логикой.  
-Переименование необходимо, т.к. Next.js трактует `src/pages/` как Pages Router.
+## 🧱 Стек
 
-Связь между ними:
+| Категория                 | Что используется                                                     |
+| ------------------------- | -------------------------------------------------------------------- |
+| Язык                      | `TypeScript`                                                         |
+| Фреймворк                 | `Next.js App Router`                                                 |
+| UI                        | `React 19`, `SCSS Modules`, `clsx`                                   |
+| State management          | `Redux Toolkit`, `RTK Query`, `react-redux`                          |
+| Валидация                 | `Zod`, `@conform-to/react`, `@conform-to/zod`                        |
+| API / Backend integration | `CoinGecko` через `app/api`, `Supabase SSR`, `@supabase/supabase-js` |
+| Графики                   | `chart.js`, `react-chartjs-2`                                        |
+| Code quality              | `ESLint`, `Prettier`, `Husky`, `lint-staged`                         |
+| Package manager           | `npm`                                                                |
+| Рекомендуемый Node.js     | `20.x`                                                               |
 
-```
-src/app/market/page.tsx              ← Next.js роут (тонкая обёртка, default export)
-  └── import { MarketPage } from '@/views/market'  ← FSD-компонент страницы
-```
+<a id="architecture"></a>
 
-`src/app/**/page.tsx` — **минимальные файлы**, только импорт и default export:
+## 🏗️ Архитектура
 
-```tsx
-// src/app/market/page.tsx
-import { MarketPage } from '@/views/market';
+<details open>
+<summary><strong>Показать раздел</strong></summary>
 
-export default MarketPage;
-```
+<a id="architecture-layout"></a>
 
-Вся логика, стейт, UI — в FSD `views/`.
+### Как устроен код
 
-### Структура проекта:
+Проект разделен на два уровня:
 
-```
-src/
-├── app/                    # Next.js App Router: роутинг, провайдеры, layout
-│   ├── layout.tsx          # Корневой layout
-│   ├── page.tsx            # → HomePage
-│   ├── market/
-│   │   └── page.tsx        # → MarketPage
-│   ├── spot/
-│   │   └── page.tsx        # → SpotPage
-│   ├── wallet/
-│   │   └── page.tsx        # → WalletPage
-│   ├── providers/          # Redux, Theme и др. провайдеры
-│   └── styles/             # Глобальные стили (global.scss)
-│
-├── views/                  # FSD-слой pages (переименован для App Router)
-│   ├── home/
-│   ├── market/
-│   ├── spot/
-│   ├── wallet/
-│   ├── dashboard/
-│   ├── deposit/
-│   ├── withdraw/
-│   ├── history/
-│   ├── settings/
-│   ├── notifications/
-│   ├── support/
-│   ├── blog/
-│   ├── privacy-policy/
-│   ├── auth/               # sign-up, log-in
-│   └── 404/
-│
-├── widgets/                # Композиция фичей и энтити
-│   ├── header/
-│   ├── sidebar/
-│   ├── footer/
-│   └── menu-modals/
-│
-├── features/               # Пользовательские сценарии
-│   ├── auth/
-│   ├── deposit/
-│   ├── withdraw/
-│   ├── trade/
-│   └── notifications/
-│
-├── entities/               # Бизнес-сущности
-│   ├── user/
-│   ├── wallet/
-│   ├── coin/
-│   ├── order/
-│   └── transaction/
-│
-└── shared/                 # Переиспользуемое, без бизнес-логики
-    ├── ui/                 # Button, Input, Modal, Card, Badge, Avatar, ...
-    ├── lib/                # Утилиты, хелперы
-    ├── api/                # Базовый API-клиент
-    ├── config/             # Константы, env
-    ├── types/              # Глобальные типы
-    └── styles/             # SCSS переменные, функции, миксины
+- `src/app` отвечает за entrypoint-логику Next.js: `layout.tsx`, `page.tsx`, route handlers, providers и store
+- FSD-слои ниже отвечают за UI, сценарии и доменные сущности
+
+Ключевые части архитектуры:
+
+- `views` содержит route-level UI вместо `pages`
+- `widgets` собирает крупные блоки страницы, например `Header` и `Footer`
+- `features` содержит пользовательские сценарии, например `auth` и `modal-search`
+- `entities` держит доменную сущность `coin`: API, схемы, форматтеры и UI
+- `shared` хранит базовый UI-kit, конфиг, хуки, утилиты, стили и `baseApi`
+
+Как проходит данные:
+
+```text
+UI -> features / entities -> shared
+UI -> /api/coins/* -> CoinGecko
+Register form -> Conform + Zod + server action
+Search modal -> RTK Query -> BFF routes -> CoinGecko
 ```
 
-### Сегменты внутри каждого слайса:
+<a id="architecture-notes"></a>
 
-| Сегмент   | Назначение                           |
-| --------- | ------------------------------------ |
-| `ui/`     | Компоненты (`.tsx` + `.module.scss`) |
-| `model/`  | Стейт, слайсы, хуки, типы            |
-| `api/`    | Запросы к серверу                    |
-| `lib/`    | Утилиты слайса                       |
-| `config/` | Конфиг / константы слайса            |
+### Что важно знать перед работой
+
+- проект использует `views`, а не `pages`, потому что `src/pages` конфликтует с `Next.js Pages Router`
+- alias `@/*` указывает на `src/*`
+- корневой store создается в `src/app/store/store.ts`
+- `RTK Query` строится от `src/shared/api/baseApi.ts`
+- `CoinGecko` ключ используется только на сервере, в route handlers
+- `docs/code-standards.md` содержит отдельный документ с правилами написания кода
 
 </details>
 
-<!-- ═══════════════════════════════════════════════════════ -->
+<a id="structure"></a>
 
-<details>
-<summary><strong>2. Именование файлов</strong></summary>
+## 🗂️ Структура проекта
 
-| Что               | Формат                        | Пример                 |
-| ----------------- | ----------------------------- | ---------------------- |
-| Компоненты        | `PascalCase.tsx`              | `UserCard.tsx`         |
-| Стили             | `PascalCase.module.scss`      | `UserCard.module.scss` |
-| Хуки              | `camelCase.ts`                | `useAuth.ts`           |
-| Утилиты / хелперы | `camelCase.ts`                | `formatDate.ts`        |
-| Типы              | `camelCase.ts` или `types.ts` | `user.ts`, `types.ts`  |
-| Слайсы Redux      | `camelCase.ts`                | `walletSlice.ts`       |
-| Константы         | `camelCase.ts`                | `routes.ts`            |
-| SCSS переменные   | `_kebab-case.scss`            | `_colors.scss`         |
+<details open>
+<summary><strong>Показать раздел</strong></summary>
+
+<a id="structure-dirs"></a>
+
+### Основные директории
+
+```text
+.
+├── docs/
+│   └── code-standards.md     # правила архитектуры и код-стандарты
+├── public/
+│   └── images/               # статические SVG и изображения
+├── src/
+│   ├── app/                  # App Router, layouts, providers, api routes
+│   ├── views/                # route-level UI: Home, Register
+│   ├── widgets/              # page-level блоки: Header, Footer
+│   ├── features/             # сценарии: auth, modal-search
+│   ├── entities/             # доменные сущности: coin
+│   └── shared/               # UI-kit, config, hooks, styles, utils, baseApi
+├── .github/workflows/        # CI
+├── .husky/                   # pre-commit и pre-push hooks
+├── package.json
+└── tsconfig.json
+```
+
+Что видно по коду прямо сейчас:
+
+- route-level страницы есть только для `Home` и `Register`
+- `app/api` содержит только роуты для поиска монет
+- `shared/ui` играет роль внутреннего UI-kit
+- `docs/code-standards.md` нужно читать отдельно от этого README
 
 </details>
 
-<!-- ═══════════════════════════════════════════════════════ -->
+<a id="figma"></a>
 
-<details>
-<summary><strong>3. Именование в коде</strong></summary>
+## 🎨 Figma
 
-| Что                  | Формат                  | Пример                    |
-| -------------------- | ----------------------- | ------------------------- |
-| Компоненты           | `PascalCase`            | `WalletCard`              |
-| Функции / переменные | `camelCase`             | `getBalance`, `isLoading` |
-| Типы / Интерфейсы    | `PascalCase`            | `WalletData`, `UserProps` |
-| Enum                 | `PascalCase`            | `OrderStatus`             |
-| Enum-значения        | `PascalCase`            | `OrderStatus.Pending`     |
-| Константы            | `UPPER_SNAKE_CASE`      | `MAX_RETRIES`, `API_URL`  |
-| SCSS-переменные      | `$kebab-case`           | `$primary`, `$space-md`   |
-| CSS-классы (modules) | `camelCase`             | `styles.cardWrapper`      |
-| Boolean              | `is/has/should` префикс | `isOpen`, `hasError`      |
+<https://www.figma.com/design/1mh1FByERVMol4iDJcPBeU/%E2%9C%A8Zyrix-My?node-id=1-11&t=7GMEUOQCpZetI4Rx-1>
 
-</details>
+<a id="status"></a>
 
-<!-- ═══════════════════════════════════════════════════════ -->
+## 📊 Статус реализации
 
-<details>
-<summary><strong>4. Экспорт</strong></summary>
+<details open>
+<summary><strong>Показать раздел</strong></summary>
 
-- **Компоненты** — только `named export`:
+<a id="status-done"></a>
 
-```tsx
-// ✅
-export const UserCard = () => { ... };
+### ✅ Реализовано
 
-// ❌
-export default function UserCard() { ... }
-```
+- landing page: `Hero`, `Features`, `Trending`, `Faq`
+- глобальные `Header` и `Footer`
+- экран регистрации `/register`
+- модальное окно поиска монет
+- BFF-роуты для поиска и trending через `CoinGecko`
+- таблица трендов и sparklines
 
-- **Исключение** — страницы Next.js (`page.tsx`, `layout.tsx`) используют `default export` (требование фреймворка).
+<a id="status-partial"></a>
 
-- **Типы** — экспортировать через `export type`:
+### 🔧 В процессе / частично
 
-```ts
-export type { UserProps };
-export type { Wallet } from './types';
-```
+- страница регистрации: есть UI и валидация; планируется подключение к `Supabase auth`
+- навигация: ссылки есть, целевых страниц в основном нет
+- language action: есть кнопка, нет modal
+- `CoinRow`: ссылка на `/coin/[id]`, маршрута нет
+- `Trade`: CTA есть, сценария нет
 
-</details>
+<a id="status-planned"></a>
 
-<!-- ═══════════════════════════════════════════════════════ -->
+### 📋 Пока не реализовано
 
-<details>
-<summary><strong>5. Компоненты</strong></summary>
-
-- Только **функциональные компоненты** (стрелочные функции):
-
-```tsx
-export const UserCard = ({ name, balance }: UserCardProps) => {
-  return <div>...</div>;
-};
-```
-
-- Один компонент — один файл.
-- Файл компонента и имя компонента совпадают: `UserCard.tsx` → `UserCard`.
-- Стили рядом с компонентом: `UserCard.module.scss`.
+- `login` page
+- `market`, `spot`, `support`, `learn` и остальные страницы из конфига путей
+- dashboard-screen из Figma: sidebar, account overview, chart, news, market cards, transaction history, pagination
+- language / currency modal из Figma
+- дополнительные account / transaction screens из макета
 
 </details>
 
-<!-- ═══════════════════════════════════════════════════════ -->
+<a id="setup"></a>
 
-<details>
-<summary><strong>6. Стили (SCSS Modules)</strong></summary>
+## 🚀 Установка и запуск
 
-- Каждый компонент — свой `.module.scss`.
-- Импорт как `styles`:
+<details open>
+<summary><strong>Показать раздел</strong></summary>
 
-```tsx
-import styles from './UserCard.module.scss';
+<a id="setup-requirements"></a>
 
-<div className={styles.root}>
+### Требования
+
+- `Node.js 20.x`
+- `npm`
+- доступ в интернет для установки зависимостей
+
+<a id="setup-quickstart"></a>
+
+### Быстрый старт
+
+```bash
+git clone <repo-url>
+cd zyrix-project
+npm install
 ```
 
-- Общие переменные через `@use`:
+Создай файл `.env.local` в корне проекта и добавь переменные из раздела ниже.
 
-```scss
-@use '@/shared/styles' as *;
+Запуск dev-сервера:
 
-.root {
-  color: $primary;
-  padding: rem(16px);
-}
+```bash
+npm run dev
 ```
 
-- **Запрещено:** глобальные стили, inline-стили, `!important`, вложенность > 3 уровней.
-- **ID-селекторы:** не использовать для стилизации.
+По умолчанию приложение открывается на `http://localhost:3000`.
 
 </details>
 
-<!-- ═══════════════════════════════════════════════════════ -->
+<a id="env"></a>
 
-<details>
-<summary><strong>7. Redux Toolkit</strong></summary>
+## 🔐 Переменные окружения
 
-- State management — только через **Redux Toolkit**.
-- Каждая сущность/фича — отдельный `slice`.
-- Структура файлов модели:
+<details open>
+<summary><strong>Показать раздел</strong></summary>
 
-```
-model/
-├── slice.ts           # createSlice
-├── selectors.ts       # селекторы
-├── types.ts           # типы стейта
-└── hooks.ts           # типизированные хуки (useAppSelector, etc.)
-```
+| Переменная                             | Назначение                                  |
+| -------------------------------------- | ------------------------------------------- |
+| `COINGECKO_API_KEY`                    | server-only ключ для BFF-роутов `CoinGecko` |
+| `NEXT_PUBLIC_SUPABASE_URL`             | публичный URL `Supabase`                    |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | публичный клиентский ключ `Supabase`        |
 
-- Название слайса = название сущности:
+Пример шаблона:
 
-```ts
-const walletSlice = createSlice({
-  name: 'wallet',
-  ...
-});
+```env
+COINGECKO_API_KEY=your_coingecko_key
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
 ```
 
-- Асинхронные операции — `createAsyncThunk`.
-- Селекторы — в отдельном файле `selectors.ts`.
-- Типизированные хуки:
+Важно:
 
-```ts
-import { useAppSelector, useAppDispatch } from '@/app/store';
-```
+- `.env.local` не коммить
+- реальные значения в README не вставлять
+- server-only ключи не использовать в client code
+- `NEXT_PUBLIC_SUPABASE_*` подготовлены для `Supabase`-интеграции, но текущий auth-flow пока на них не завязан
 
 </details>
 
-<!-- ═══════════════════════════════════════════════════════ -->
+<a id="scripts"></a>
 
-<details>
-<summary><strong>8. API</strong></summary>
+## 📜 Скрипты
 
-- Базовый клиент — в `shared/api/`.
-- Каждый слайс может иметь свой `api/` сегмент.
-- Запросы через RTK Query или `createAsyncThunk`.
-- Типизировать **все** запросы и ответы.
-- URL-эндпоинты — константами:
+<details open>
+<summary><strong>Показать раздел</strong></summary>
 
-```ts
-export const ENDPOINTS = {
-  coins: '/api/coins',
-  wallet: '/api/wallet',
-} as const;
-```
-
-</details>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-
-<details>
-<summary><strong>9. Общие правила</strong></summary>
-
-- Строгий **TypeScript** — `strict: true`, без `any`.
-- `as` — только в крайних случаях с комментарием почему.
-- Без «магических» значений — выносить в константы.
-- Без закомментированного кода в коммитах.
-- Если файл > 150 строк — подумать о декомпозиции.
-- Prettier + ESLint — обязательны, форматирование единообразное.
+| Команда                | Что делает                                             |
+| ---------------------- | ------------------------------------------------------ |
+| `npm run dev`          | запускает dev-сервер                                   |
+| `npm run build`        | собирает production build                              |
+| `npm run start`        | запускает production-сервер                            |
+| `npm run lint`         | запускает ESLint                                       |
+| `npm run lint:fix`     | исправляет ESLint-ошибки, где это возможно             |
+| `npm run typecheck`    | запускает TypeScript без эмита                         |
+| `npm run format`       | форматирует проект через Prettier                      |
+| `npm run format:check` | проверяет форматирование                               |
+| `npm run check`        | последовательно запускает `lint`, `typecheck`, `build` |
+| `npm run prepare`      | инициализирует Husky hooks                             |
 
 </details>
 
-<!-- ═══════════════════════════════════════════════════════ -->
+<a id="quality"></a>
 
-<details>
-<summary><strong>10. Функции</strong></summary>
+## ✅ Качество и проверки
 
-### Ограничения:
+<details open>
+<summary><strong>Показать раздел</strong></summary>
 
-| Метрика                  | Лимит        |
-| ------------------------ | ------------ |
-| Максимум параметров      | **3**        |
-| Максимум вложенности     | **3 уровня** |
-| Максимум строк в функции | **30**       |
+### Что настроено
 
-### Параметры:
+- CI в `.github/workflows/ci.yml` запускает `lint`, `typecheck`, `build`
+- `pre-commit` hook запускает `npm exec lint-staged`
+- `pre-push` hook запускает `npm run check`
 
-- Если параметров > 3 — передавать **объект**:
+### Что проходит сейчас
 
-```ts
-// ✅
-const createOrder = (params: CreateOrderParams) => { ... };
+- `npm run lint` проходит
+- `npm run typecheck` проходит
+- `npm run build` падает в текущем окружении на `next/font/google`, потому что `Poppins` подтягивается с `fonts.googleapis.com`
 
-// ❌
-const createOrder = (pair: string, type: string, amount: number, price: number) => { ... };
-```
+Для локальной самопроверки используй:
 
-### Вложенность:
-
-```ts
-// ❌ Слишком глубоко
-if (a) {
-  if (b) {
-    if (c) {
-      if (d) { ... }  // 4-й уровень — запрещено
-    }
-  }
-}
-
-// ✅ Ранний выход (early return)
-if (!a) return;
-if (!b) return;
-if (!c) return;
-// основной код
-```
-
-### Размер:
-
-- Функция > 30 строк → декомпозировать на вспомогательные.
-- Каждая функция делает **одну вещь** (Single Responsibility).
-
-</details>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-
-<details>
-<summary><strong>11. Типизация пропсов</strong></summary>
-
-- Пропсы — через `interface`, имя: `ComponentNameProps`:
-
-```tsx
-interface UserCardProps {
-  name: string;
-  balance: number;
-  onDeposit: () => void;
-}
-
-export const UserCard = ({ name, balance, onDeposit }: UserCardProps) => {
-  return <div>...</div>;
-};
-```
-
-- Если компонент принимает `children`:
-
-```tsx
-interface LayoutProps {
-  children: React.ReactNode;
-}
-```
-
-- Если нужно расширить HTML-элемент:
-
-```tsx
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: 'primary' | 'secondary';
-}
-```
-
-- **Не использовать** `React.FC` — деструктурировать пропсы напрямую.
-
-</details>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-
-<details>
-<summary><strong>12. Размещение типов</strong></summary>
-
-| Тип                          | Где размещать                   |
-| ---------------------------- | ------------------------------- |
-| Props компонента             | В том же файле, над компонентом |
-| Типы стейта (Redux)          | `model/types.ts`                |
-| Типы API (request/response)  | `api/types.ts`                  |
-| Общие / переиспользуемые     | `shared/types/`                 |
-| Типы только для одного файла | В том же файле                  |
-
-### Правило:
-
-- Тип используется **в одном файле** → объявлять там же.
-- Тип используется **в нескольких файлах слайса** → `model/types.ts` или `api/types.ts`.
-- Тип используется **в нескольких слайсах** → `shared/types/`.
-
-</details>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-
-<details>
-<summary><strong>13. type vs interface</strong></summary>
-
-| Когда                          | Что использовать |
-| ------------------------------ | ---------------- |
-| Props компонента               | `interface`      |
-| Объекты с фиксированной формой | `interface`      |
-| Union-типы                     | `type`           |
-| Пересечения                    | `type`           |
-| Примитивные алиасы             | `type`           |
-| Кортежи                        | `type`           |
-| Mapped / утилитарные типы      | `type`           |
-
-### Примеры:
-
-```ts
-// interface — объект с фиксированной формой
-interface Wallet {
-  id: string;
-  balance: number;
-  currency: string;
-}
-
-// type — union
-type OrderSide = 'buy' | 'sell';
-
-// type — пересечение
-type AdminUser = User & { permissions: string[] };
-
-// type — утилитарный
-type WalletKeys = keyof Wallet;
+```bash
+npm run lint
+npm run typecheck
+npm run build
 ```
 
 </details>
 
-<!-- ═══════════════════════════════════════════════════════ -->
+<a id="standards"></a>
 
-<details>
-<summary><strong>14. Порядок импортов</strong></summary>
+## 📏 Стандарты проекта
 
-Группы разделяются пустой строкой, порядок сверху вниз:
+Правила архитектуры, импортов, RTK, Zod, Supabase и code style вынесены в отдельный документ:
 
-```tsx
-// 1. React / Next
-import { useState, useEffect } from 'react';
-import type { ReactNode } from 'react';
+- [./docs/code-standards.md](./docs/code-standards.md)
 
-// 2. Внешние библиотеки
-import { useSelector } from 'react-redux';
-import type { TypedUseSelectorHook } from 'react-redux';
+Этот README отвечает на вопрос “что это за проект и как его запустить”.  
+`docs/code-standards.md` отвечает на вопрос “как писать код внутри этого проекта”.
 
-// 3. Слои FSD (shared → entities → features → widgets → views)
-import { Button } from '@/shared/ui';
-import type { ButtonProps } from '@/shared/ui';
-import { CoinCard } from '@/entities/coin';
-import { useDeposit } from '@/features/deposit';
-import { Header } from '@/widgets/header';
-import { MarketPage } from '@/views/market';
+<a id="limitations"></a>
 
-// 4. Родственные / локальные импорты
-import { useWalletData } from '../model/hooks';
-import type { Wallet } from '../model/types';
-import { WalletItem } from './WalletItem';
+## ⚠️ Ограничения и текущее поведение
 
-// 5. Стили — всегда последние
-import styles from './WalletCard.module.scss';
-```
-
-### Правила:
-
-1. **Порядок групп:** `react/next` → внешние библиотеки → `@/shared` → `@/entities` → `@/features` → `@/widgets` → `@/views` → локальные (`../`, `./`) → стили.
-2. Внутри каждой группы импорты идут по алфавиту.
-3. `type`-импорты идут **после value-импортов в той же группе**.
-4. Для типов использовать `import type`.
-5. SCSS/CSS-импорт всегда последним.
-
-</details>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-
-<details>
-<summary><strong>15. Хуки</strong></summary>
-
-- Кастомные хуки — всегда с префиксом `use`:
-
-```ts
-const useWalletBalance = () => { ... };
-```
-
-- Один хук — одна ответственность.
-- Хуки, связанные со стейтом слайса — в `model/hooks.ts`.
-- Общие хуки (не привязаны к бизнесу) — в `shared/lib/hooks/`.
-- Хук > 30 строк → декомпозировать.
-
-</details>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-
-<details>
-<summary><strong>16. Return в компонентах</strong></summary>
-
-- **Без JSX оборачивания в `()`** если возврат одной строки:
-
-```tsx
-// ✅ Однострочный
-export const Badge = ({ text }: BadgeProps) => <span>{text}</span>;
-```
-
-- **С `()` для многострочного JSX:**
-
-```tsx
-// ✅ Многострочный
-export const UserCard = ({ name }: UserCardProps) => (
-  <div className={styles.root}>
-    <h2>{name}</h2>
-  </div>
-);
-```
-
-- **С `return`** если есть логика перед JSX:
-
-```tsx
-export const WalletCard = ({ id }: WalletCardProps) => {
-  const wallet = useAppSelector(selectWallet(id));
-
-  if (!wallet) return null;
-
-  return (
-    <div className={styles.root}>
-      <span>{wallet.balance}</span>
-    </div>
-  );
-};
-```
-
-</details>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-
-<details>
-<summary><strong>17. Реэкспорт и Public API (FSD)</strong></summary>
-
-### Принцип:
-
-Каждый слайс выставляет наружу только нужное — через `index.ts` (public API).  
-**Импорт внутренних файлов слайса напрямую — запрещён.**
-
-### Где создаётся `index.ts`:
-
-| Уровень  | Путь                        | Пример                                      |
-| -------- | --------------------------- | ------------------------------------------- |
-| shared   | `shared/<segment>/index.ts` | `shared/ui/index.ts`, `shared/lib/index.ts` |
-| entities | `entities/<slice>/index.ts` | `entities/user/index.ts`                    |
-| features | `features/<slice>/index.ts` | `features/deposit/index.ts`                 |
-| widgets  | `widgets/<slice>/index.ts`  | `widgets/header/index.ts`                   |
-| views    | `views/<slice>/index.ts`    | `views/market/index.ts`                     |
-| app      | ❌ Нет public API           | Верхний слой, ничего не экспортирует        |
-
-### Правила:
-
-**1. Импорт только через public API:**
-
-```ts
-// ✅
-import { UserCard } from '@/entities/user';
-
-// ❌ Прямой импорт внутреннего файла
-import { UserCard } from '@/entities/user/ui/UserCard';
-```
-
-**2. `index.ts` содержит только реэкспорты** (без логики):
-
-```ts
-// entities/wallet/index.ts
-export { WalletCard } from './ui/WalletCard';
-export { walletReducer } from './model/slice';
-export type { Wallet } from './model/types';
-```
-
-**3. Не экспортировать внутренние хелперы:**
-
-```ts
-// ✅ Только публичное
-export { Button } from './Button';
-export type { ButtonProps } from './Button';
-
-// ❌ Внутренний хелпер — не выносить
-export { getButtonClasses } from './lib/getButtonClasses';
-```
-
-**4. Перекрёстные импорты между слайсами одного слоя — запрещены:**
-
-```ts
-// ❌ feature → feature
-import { something } from '@/features/withdraw'; // внутри features/deposit
-```
-
-**5. shared/styles — исключение.** SCSS использует `@use` / `@forward`, public API — `_index.scss`:
-
-```scss
-@forward 'variables/colors';
-@forward 'functions/rem';
-```
-
-**6. Внутри слайса** — свободный импорт между сегментами:
-
-```ts
-// entities/user/ui/UserCard.tsx
-import { useUser } from '../model/hooks'; // ✅ внутри слайса
-```
-
-</details>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-
----
-
-## 📋 Сводная таблица лимитов
-
-| Метрика                      | Лимит    |
-| ---------------------------- | -------- |
-| Параметров у функции         | 3        |
-| Вложенность                  | 3 уровня |
-| Строк в функции              | 30       |
-| Строк в файле (рекомендация) | 150      |
-| Вложенность SCSS             | 3 уровня |
+- проект пока покрывает только часть макета Figma
+- большая часть ссылок из `PATHS` и навигации указывает на страницы, которых еще нет в `src/app`
+- build в окружении без доступа к `Google Fonts` падает на загрузке `Poppins` через `next/font/google`
+- `Supabase` подготовлен на уровне зависимостей и env, но не подключен к текущему register-flow

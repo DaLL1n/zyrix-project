@@ -33,6 +33,7 @@ export const RegisterForm = () => {
       id={form.id}
       action={formAction}
       onSubmit={form.onSubmit}
+      formError={form.errors?.[0]}
       buttonText={REGISTER_FORM_CONTENT.buttonText}
       isSubmitDisabled={!isReadyToSubmit || isPending}
       footerText={REGISTER_FORM_CONTENT.footerText}
@@ -47,7 +48,6 @@ export const RegisterForm = () => {
         const conformProps = getInputProps(conformField, {
           type: field.type,
         });
-
         const uiProps = {
           className: styles['input'],
           placeholder: field.placeholder,
