@@ -5,10 +5,21 @@
   flex-direction: column;
   width: 100%;
   max-width: rem(600px);
+  position: relative;
 }
 
 .logo-link {
-  margin: 0 auto rem(64px);
+  margin: 0 auto rem(48px);
+}
+
+.form-error {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: rem(70px);
+  left: 0;
+  color: $error-dark-1;
+  font-size: rem($body2-size);
 }
 
 .form {

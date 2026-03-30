@@ -9,6 +9,7 @@ type AuthFormLayoutProps = {
   children: React.ReactNode;
   onSubmit?: (event: SubmitEvent<HTMLFormElement>) => void;
   action: (payload: FormData) => void;
+  formError?: string;
   buttonText: string;
   isSubmitDisabled?: boolean;
   footerText?: string;
@@ -21,6 +22,7 @@ export const AuthFormLayout = ({
   children,
   onSubmit,
   action,
+  formError,
   buttonText,
   isSubmitDisabled,
   footerText,
@@ -32,6 +34,7 @@ export const AuthFormLayout = ({
       <Link className={styles['logo-link']} href="/">
         <Icon name="logo" width={132} height={60} />
       </Link>
+      <span className={styles['form-error']}>{formError}</span>
       <form
         id={id}
         className={styles['form']}
