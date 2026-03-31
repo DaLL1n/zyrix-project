@@ -17,9 +17,9 @@ export const PATHS = {
   HELP_CENTER: '/help-center',
   CONTACT_US: '/contact-us',
   STATUS: '/status',
-  REGISTER: '/register',
-  LOGIN: '/login',
-} as const;
+  SIGN_UP: '/sign-up',
+  SIGN_IN: '/sign-in',
+} as const satisfies Record<string, string>;
 
 export type AppPathKey = keyof typeof PATHS;
 export type AppPathValue = (typeof PATHS)[AppPathKey];

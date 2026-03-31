@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const registerSchema = z
+export const signUpSchema = z
   .object({
     name: z.preprocess(
       (val) => (typeof val === 'string' ? val.trim() : val),

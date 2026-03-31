@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import { getInputProps } from '@conform-to/react';
 import { AuthFormLayout, Checkbox, Input, InputPassword } from '@/shared/ui';
 import { PATHS } from '@/shared/config';
-import { useRegisterForm } from '../../model/useRegisterForm';
+import { useSignUpForm } from '../../model/useRegisterForm';
 import { REGISTER_FORM_CONTENT, REGISTER_FORM_FIELDS } from './constants';
 import styles from './RegisterForm.module.scss';
 
@@ -22,7 +22,7 @@ export const RegisterForm = () => {
     isReadyToSubmit,
     formAction,
     termsAcceptedValidity,
-  } = useRegisterForm();
+  } = useSignUpForm();
 
   const toggleShowPasswords = useCallback(() => {
     setShowPasswords((prev) => !prev);
@@ -38,7 +38,7 @@ export const RegisterForm = () => {
       isSubmitDisabled={!isReadyToSubmit || isPending}
       footerText={REGISTER_FORM_CONTENT.footerText}
       footerLinkText={REGISTER_FORM_CONTENT.footerLink}
-      footerLinkHref={PATHS.LOGIN}
+      footerLinkHref={PATHS['SIGN_IN']}
     >
       {REGISTER_FORM_FIELDS.map((field) => {
         const conformField = fields[field.name as keyof typeof fields];
