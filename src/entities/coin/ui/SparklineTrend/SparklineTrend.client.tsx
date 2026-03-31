@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import {
   Chart as ChartJS,
@@ -27,7 +27,7 @@ const getShadowLineOptions = (chart: Chart): ShadowLineOptions => {
 const shadowLinePlugin = {
   id: 'shadowLine',
   beforeDatasetsDraw: (chart: Chart) => {
-    const ctx = chart.ctx as CanvasRenderingContext2D;
+    const ctx = chart.ctx;
     ctx.save();
     const opts = getShadowLineOptions(chart);
     ctx.shadowColor = opts.shadowColor || '#000';
@@ -35,7 +35,7 @@ const shadowLinePlugin = {
     ctx.shadowOffsetY = opts.shadowOffsetY || 8;
   },
   afterDatasetsDraw: (chart: Chart) => {
-    (chart.ctx as CanvasRenderingContext2D).restore();
+    chart.ctx.restore();
   },
 };
 

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { formatCurrency } from '@/shared/lib';
 import type { Coin } from '../../model/schemas';
 import { formatPriceChange } from '../../lib/formatPriceChange';
-import { SparklineTrend } from '../SparklineTrend/SparklineTrend';
+import { SparklineTrend } from '../SparklineTrend/SparklineTrend.client';
 import styles from './CoinRow.module.scss';
 
 type CoinRowProps = {

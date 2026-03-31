@@ -1,17 +1,17 @@
 import type z from 'zod';
-import type { registerSchema } from '../../model/auth.schemas';
+import type { signUpSchema } from '../../model/auth.schemas';
 
 export const REGISTER_FORM_CONTENT = {
   buttonText: 'Sign Up to your account',
   footerText: 'Already have an account?',
-  footerLink: 'Log In',
+  footerLink: 'Sign in',
   checkboxText:
     'By creating an account, I agree to Zyrix’s Terms and Privacy Policy',
 } as const;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-type FieldName = keyof z.infer<typeof registerSchema>;
+type FieldName = keyof Omit<z.infer<typeof signUpSchema>, 'termsAccepted'>;
 
 type RegisterFieldType = 'text' | 'email' | 'password';
 

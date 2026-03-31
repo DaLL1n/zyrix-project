@@ -1,8 +1,8 @@
 import { useActionState } from 'react';
 import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
-import { authAction } from '../api/authAction.server';
-import { registerSchema } from './auth.schemas';
+import { signUpAction } from '../api/signUpAction.server';
+import { signUpSchema } from './auth.schemas';
 
 const requiredFieldNames = [
   'name',
@@ -19,11 +19,9 @@ const requiredFieldNames = [
  * @returns Объект с метаданными формы, обработчиком submit и вычислениями
  * для состояния кнопки отправки и чекбокса согласия.
  */
-export const useRegisterForm = () => {
-  // Привязываем intent один раз, чтобы использовать общий server action для регистрации.
-  const registerAction = authAction.bind(null, 'register');
+export const useSignUpForm = () => {
   const [state, formAction, isPending] = useActionState(
-    registerAction,
+    signUpAction,
     undefined,
   );
 
@@ -31,7 +29,7 @@ export const useRegisterForm = () => {
     // Conform подхватывает результат server action и раскладывает серверные ошибки по полям.
     lastResult: state,
     onValidate({ formData }) {
-      return parseWithZod(formData, { schema: registerSchema });
+      return parseWithZod(formData, { schema: signUpSchema });
     },
     // Валидируем сразу при вводе, чтобы состояние полей и кнопки обновлялось без blur.
     shouldValidate: 'onInput',

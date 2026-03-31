@@ -9,7 +9,8 @@ type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
 };
 
 export const Checkbox = ({ label, isValid, ...props }: CheckboxProps) => {
-  const checkboxId = props.id ?? useId();
+  const generatedId = useId();
+  const checkboxId = props.id ?? generatedId;
 
   return (
     <div className={styles['checkbox']}>

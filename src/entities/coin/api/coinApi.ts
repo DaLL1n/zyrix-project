@@ -1,7 +1,7 @@
 import { baseApi } from '@/shared/api';
 import { validateWithZod } from '@/shared/lib';
-import { coinsSearchSchema, coinTopSearchSchema } from '../model/schemas';
 import { normalizeNestedResponse } from '../lib/normalizeNestedResponse';
+import { coinsSearchSchema, coinTopSearchSchema } from '../model/schemas';
 import type { SearchCoin } from '../model/search.types';
 
 export const coinApi = baseApi.injectEndpoints({

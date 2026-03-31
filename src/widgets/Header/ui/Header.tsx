@@ -29,12 +29,12 @@ export const Header = () => {
         <div className={styles['actions']}>
           <UtilityActions />
           <div className={styles['auth-actions']}>
-            <Button className={styles['auth-link']} href={PATHS.REGISTER}>
+            <Button className={styles['auth-link']} href={PATHS['SIGN_UP']}>
               Sign up
             </Button>
             <Button
               className={styles['auth-link']}
-              href={PATHS.LOGIN}
+              href={PATHS['SIGN_IN']}
               variant="secondary"
             >
               Log in

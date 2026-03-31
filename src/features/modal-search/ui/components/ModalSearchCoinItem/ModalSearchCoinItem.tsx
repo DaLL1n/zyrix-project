@@ -11,49 +11,51 @@ type ModalSearchCoinItemProps = {
   coin: SearchCoin;
 };
 
-export const ModalSearchCoinItem = memo(
-  ({ coin }: ModalSearchCoinItemProps) => {
-    const { id, name, symbol, image, price, priceChange24h } = coin;
-    const { priceChange, cellClass } = formatPriceChange(priceChange24h ?? 0);
+const ModalSearchCoinItemComponent = ({ coin }: ModalSearchCoinItemProps) => {
+  const { id, name, symbol, image, price, priceChange24h } = coin;
+  const { priceChange, cellClass } = formatPriceChange(priceChange24h ?? 0);
 
-    return (
-      <li className={styles['coin-item']}>
-        <Link className={styles['coin-link']} href={id} title={name}>
-          <span className={styles['coin-label']}>
-            <Image
-              className={styles['coin-icon']}
-              src={image}
-              width={24}
-              height={24}
-              alt={name}
-              unoptimized
-            />
-            <span>{symbol} USDT</span>
-          </span>
-          <span className={styles['price']}>{formatCurrency(price)}</span>
-          <span className={clsx(styles['price-change'], styles[cellClass])}>
-            {priceChange}
-          </span>
-        </Link>
-        <Button
-          variant="iconOnly"
-          className={styles['favorite-button']}
-          aria-label={`Add ${name} to favorites`}
-        >
-          <Icon
-            className={styles['favorite-icon']}
-            name="favorite-star"
-            width={14}
-            height={14}
+  return (
+    <li className={styles['coin-item']}>
+      <Link className={styles['coin-link']} href={id} title={name}>
+        <span className={styles['coin-label']}>
+          <Image
+            className={styles['coin-icon']}
+            src={image}
+            width={24}
+            height={24}
+            alt={name}
+            unoptimized
           />
-          <Icon
-            className={styles['favorite-icon-filled']}
-            name="favorite-star-filled"
-            width={14}
-            height={14}
-          />
-        </Button>
-      </li>
-    );
-  },
-);
+          <span>{symbol} USDT</span>
+        </span>
+        <span className={styles['price']}>{formatCurrency(price)}</span>
+        <span className={clsx(styles['price-change'], styles[cellClass])}>
+          {priceChange}
+        </span>
+      </Link>
+      <Button
+        variant="iconOnly"
+        className={styles['favorite-button']}
+        aria-label={`Add ${name} to favorites`}
+      >
+        <Icon
+          className={styles['favorite-icon']}
+          name="favorite-star"
+          width={14}
+          height={14}
+        />
+        <Icon
+          className={styles['favorite-icon-filled']}
+          name="favorite-star-filled"
+          width={14}
+          height={14}
+        />
+      </Button>
+    </li>
+  );
+};
+
+ModalSearchCoinItemComponent.displayName = 'ModalSearchCoinItem';
+
+export const ModalSearchCoinItem = memo(ModalSearchCoinItemComponent);
