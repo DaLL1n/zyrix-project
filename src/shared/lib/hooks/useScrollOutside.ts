@@ -11,5 +11,5 @@ export const useScrollOutside = (callback: () => void): void => {
     return () => {
       document.removeEventListener('scroll', handleClose);
     };
-  }, []);
+  }, [callback]);
 };

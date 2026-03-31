@@ -16,7 +16,8 @@ export const Input = ({
   isValid,
   ...props
 }: InputProps) => {
-  const inputId = props.id ?? useId();
+  const generatedId = useId();
+  const inputId = props.id ?? generatedId;
   const errorId = `${inputId}-error`;
 
   const inputClass = clsx(styles['input'], className, {
