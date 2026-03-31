@@ -11,6 +11,6 @@ export { formatPriceChange } from './lib/formatPriceChange';
 export { normalizeNestedResponse } from './lib/normalizeNestedResponse';
 
 //ui
-export { SparklineTrend } from './ui/SparklineTrend/SparklineTrend';
+export { SparklineTrend } from './ui/SparklineTrend/SparklineTrend.client';
 export { CoinRow } from './ui/CoinRow/CoinRow';
 export { CoinTable } from './ui/CoinTable/CoinTable';
