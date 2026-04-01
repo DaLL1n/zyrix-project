@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { FooterNavMenu } from './FooterNavMenu/FooterNavMenu';
 import { Icon, SocialList } from '@/shared/ui';
-import { SOCIAL_ITEMS } from '../model/constants';
+import { SOCIAL_ITEMS } from '../model/consts';
 
 import styles from './Footer.module.scss';
 

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button, Icon } from '@/shared/ui';
-import { HEADER_NAV_ITEMS } from '../model/constants';
+import { HEADER_NAV_ITEMS } from '../model/consts';
 import { UtilityActions } from './UtilityActions/UtilityActions.client';
 import { HeaderNavMenu } from './NavMenu/NavMenu.client';
 import styles from './Header.module.scss';
