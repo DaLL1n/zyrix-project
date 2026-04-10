@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { createClient } from '@/shared/api/supabase/server';
 import { createAuthAction } from '../lib/createAuthAction';
 import { getAuthErrorMessage } from '../lib/getAuthErrorMessage';
+import { signUpSchema } from '../model/auth.schemas';
 
 /**
  * Создаёт попытку регистрации по данным формы.
@@ -15,7 +16,7 @@ import { getAuthErrorMessage } from '../lib/getAuthErrorMessage';
  */
 export const signUpAction = async (prevState: unknown, formData: FormData) => {
   // Собираем и валидируем данные формы, чтобы дальше работать только с проверенным вводом
-  const submission = createAuthAction('signUp', prevState, formData);
+  const submission = createAuthAction(signUpSchema, prevState, formData);
 
   // Если проверка не прошла, сразу отдаём ошибки в форму и не возвращаем поля с паролем в интерфейс
   if (submission.status !== 'success') {
@@ -35,7 +36,6 @@ export const signUpAction = async (prevState: unknown, formData: FormData) => {
         // Сохраняем дополнительные поля профиля сразу при регистрации, чтобы профиль был заполнен с первого шага
         name: submission.value.name.trim(),
         surname: submission.value.surname.trim(),
-        referal_code: '',
       },
     },
   });
@@ -57,7 +57,6 @@ export const signUpAction = async (prevState: unknown, formData: FormData) => {
 
   // Обновляем главную страницу, чтобы на ней появились свежие данные
   revalidatePath('/');
-
   // После успешной регистрации отправляем пользователя на главную
   redirect('/');
 };

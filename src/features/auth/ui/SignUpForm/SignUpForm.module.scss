@@ -1,0 +1,11 @@
+@use '@/shared/styles/_index.scss' as *;
+
+.input-wrapper {
+  position: relative;
+}
+
+.input {
+  &::placeholder {
+    color: $neutral-text-secondary;
+  }
+}

@@ -1,15 +1,11 @@
 import { parseWithZod } from '@conform-to/zod';
-import type { AuthMode } from '../model/auth.types';
-import { signUpSchema } from '../model/auth.schemas';
-
+import type z from 'zod';
 
 export const createAuthAction = (
-  authMode: AuthMode,
+  schema: z.ZodSchema,
   prevState: unknown,
   formData: FormData,
 ) => {
-  const schema = authMode === 'signUp' ? signUpSchema : signUpSchema;
-
   const submission = parseWithZod(formData, { schema });
 
   return submission;

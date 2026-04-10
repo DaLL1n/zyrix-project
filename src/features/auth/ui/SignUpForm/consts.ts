@@ -4,7 +4,7 @@ import type { signUpSchema } from '../../model/auth.schemas';
 export const SIGN_UP_FORM_CONTENT = {
   buttonText: 'Sign Up to your account',
   footerText: 'Already have an account?',
-  footerLink: 'Sign in',
+  footerLinkText: 'Log In',
   checkboxText:
     'By creating an account, I agree to Zyrix’s Terms and Privacy Policy',
 } as const;
@@ -20,7 +20,6 @@ type SignUpFormField = {
   type: SignUpFieldType;
   placeholder: string;
   autoComplete: string;
-  'aria-autocomplete': 'inline' | 'list' | 'both' | 'none';
   'aria-label': string;
 };
 
@@ -30,7 +29,6 @@ export const SIGN_UP_FORM_FIELDS = [
     type: 'text',
     placeholder: 'Name',
     autoComplete: 'given-name',
-    'aria-autocomplete': 'none',
     'aria-label': 'Name',
   },
   {
@@ -38,7 +36,6 @@ export const SIGN_UP_FORM_FIELDS = [
     type: 'text',
     placeholder: 'Surname',
     autoComplete: 'family-name',
-    'aria-autocomplete': 'none',
     'aria-label': 'Surname',
   },
   {
@@ -46,7 +43,6 @@ export const SIGN_UP_FORM_FIELDS = [
     type: 'email',
     placeholder: 'Email address',
     autoComplete: 'email',
-    'aria-autocomplete': 'none',
     'aria-label': 'Email address',
   },
   {
@@ -54,7 +50,6 @@ export const SIGN_UP_FORM_FIELDS = [
     type: 'password',
     placeholder: 'Password',
     autoComplete: 'new-password',
-    'aria-autocomplete': 'list',
     'aria-label': 'Password',
   },
   {
@@ -62,7 +57,6 @@ export const SIGN_UP_FORM_FIELDS = [
     type: 'password',
     placeholder: 'Confirm password',
     autoComplete: 'new-password',
-    'aria-autocomplete': 'list',
     'aria-label': 'Confirm password',
   },
 ] as const satisfies readonly SignUpFormField[];

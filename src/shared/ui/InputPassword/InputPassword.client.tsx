@@ -41,6 +41,7 @@ export const InputPassword = ({
         type={isVisible ? 'text' : 'password'}
         error={error}
         isValid={isValid}
+        aria-autocomplete="list"
       />
       {!hideToggleButton && (
         <Button

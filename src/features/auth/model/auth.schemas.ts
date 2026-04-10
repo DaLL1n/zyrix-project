@@ -44,3 +44,18 @@ export const signUpSchema = z
     message: 'Passwords do not match',
     path: ['confirmPassword'],
   });
+
+///////////////////////////////////////////////////////////////////////////////
+
+export const signInSchema = z.object({
+  email: z.preprocess(
+    (val) => (typeof val === 'string' ? val.trim() : val),
+    z
+      .string({ required_error: 'Email is required' })
+      .email('Invalid email address'),
+  ),
+  password: z.preprocess(
+    (val) => (typeof val === 'string' ? val.trim() : val),
+    z.string({ required_error: 'Password is required' }),
+  ),
+});
