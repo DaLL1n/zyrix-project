@@ -1,5 +1,5 @@
 import { NavMenu } from '@/shared/ui';
-import { FOOTER_NAV_ITEMS } from '../../model/constants';
+import { FOOTER_NAV_ITEMS } from '../../model/consts';
 import Link from 'next/link';
 import styles from './FooterNavMenu.module.scss';
 

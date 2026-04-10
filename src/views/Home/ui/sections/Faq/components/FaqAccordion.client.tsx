@@ -1,7 +1,7 @@
 'use client';
 
 import { Accordion } from '@/shared/ui';
-import { FAQ_ITEMS } from '../constants';
+import { FAQ_ITEMS } from '../consts';
 import { useState } from 'react';
 import styles from './FaqAccordion.module.scss';
 

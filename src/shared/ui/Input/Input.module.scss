@@ -9,7 +9,9 @@
   width: 100%;
   height: 100%;
   border: 1px solid transparent;
-  padding: 0;
+  padding: rem(14px) rem($padding-md);
+  color: $neutral-text-secondary;
+  min-height: rem(56px);
   background-color: $neutral-divider;
   border-radius: rem($radius-xl);
   color: $neutral-text-secondary;

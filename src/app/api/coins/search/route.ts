@@ -1,10 +1,12 @@
-import { COIN_GECKO_API_URL } from '@/shared/config';
+﻿import { COIN_GECKO_API_URL } from '@/shared/config';
 import { NextResponse } from 'next/server';
 
 export const GET = async (request: Request) => {
+  // 1. Достаём поисковую строку из URL и убираем лишние пробелы.
   const { searchParams } = new URL(request.url);
   const query = searchParams.get('query')?.trim();
 
+  // 2. Если запрос пустой, сразу возвращаем 400.
   if (!query) {
     return NextResponse.json(
       { error: 'Query parameter is required' },
@@ -12,44 +14,67 @@ export const GET = async (request: Request) => {
     );
   }
 
+  const apiKey = process.env.COINGECKO_API_KEY;
+
+  // 3. Проверяем, что ключ CoinGecko доступен в окружении.
+  if (!apiKey) {
+    console.error('BFF Search Error: COINGECKO_API_KEY is missing');
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 },
+    );
+  }
+
   const headers = {
-    'x-cg-demo-api-key': process.env.COINGECKO_API_KEY!,
+    'x-cg-demo-api-key': apiKey,
     accept: 'application/json',
   };
 
   try {
-    // 1. Ищем монеты (текстовый поиск)
-    const searchRes = await fetch(
-      `${COIN_GECKO_API_URL}/search?query=${query}`,
-      { headers },
-    );
-    if (!searchRes.ok) throw new Error('Search failed');
+    // 4. Собираем URL через searchParams, чтобы спецсимволы в query
+    // корректно кодировались и не ломали запрос.
+    const searchUrl = new URL(`${COIN_GECKO_API_URL}/search`);
+    searchUrl.searchParams.set('query', query);
+
+    // 5. Ищем монеты по текстовому запросу.
+    const searchRes = await fetch(searchUrl.toString(), { headers });
+
+    if (!searchRes.ok) {
+      throw new Error('Search failed');
+    }
+
     const searchData = await searchRes.json();
 
-    // Если ничего не найдено
+    // 6. Если совпадений нет, возвращаем пустой список в формате UI.
     if (!searchData.coins || searchData.coins.length === 0) {
       return NextResponse.json({ coins: [] });
     }
 
-    // 2. Берем топ-7 ID
+    // 7. Берём только первые 7 id для второго запроса.
     const topCoinIds = searchData.coins
       .slice(0, 7)
       .map((coin: { id: string }) => coin.id)
       .join(',');
 
-    // 3. Запрашиваем полные рыночные данные по этим ID (включая sparkline и цены)
-    const marketsRes = await fetch(
-      `${COIN_GECKO_API_URL}/coins/markets?vs_currency=usd&ids=${topCoinIds}&price_change_percentage=24h`,
-      { headers },
-    );
-    if (!marketsRes.ok) throw new Error('Markets fetch failed');
+    // 8. Запрашиваем полные рыночные данные по найденным монетам.
+    const marketsUrl = new URL(`${COIN_GECKO_API_URL}/coins/markets`);
+    marketsUrl.searchParams.set('vs_currency', 'usd');
+    marketsUrl.searchParams.set('ids', topCoinIds);
+    marketsUrl.searchParams.set('price_change_percentage', '24h');
+
+    const marketsRes = await fetch(marketsUrl.toString(), { headers });
+
+    if (!marketsRes.ok) {
+      throw new Error('Markets fetch failed');
+    }
+
     const marketsData = await marketsRes.json();
 
-    // Возвращаем данные.
-    // Оборачиваем в объект { coins: [...] } чтобы структура совпадала с ожиданиями UI
+    // 9. Возвращаем ответ в формате { coins: [...] }, который уже ждёт UI.
     return NextResponse.json({ coins: marketsData });
   } catch (error) {
     console.error('BFF Search Error:', error);
+
     return NextResponse.json(
       { error: 'Internal Server Error' },
       { status: 500 },

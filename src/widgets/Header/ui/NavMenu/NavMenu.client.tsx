@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { NavMenu } from '@/shared/ui';
-import { HEADER_NAV_ITEMS } from '../../model/constants';
+import { HEADER_NAV_ITEMS } from '../../model/consts';
 import styles from './NavMenu.module.scss';
 
 export const HeaderNavMenu = () => {

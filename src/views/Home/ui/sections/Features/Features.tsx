@@ -1,4 +1,4 @@
-import { CARD_DATA } from './constants';
+import { CARD_DATA } from './consts';
 import { Card } from './components/Card/Card';
 import styles from './Features.module.scss';
 

@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 
 import { CoinTable } from '@/entities/coin';
 import { TrendTableBody } from './components/TrendTableBody/TrendTableBody';
-import { HEADERS_TABLE } from './constants';
+import { HEADERS_TABLE } from './consts';
 import styles from './Trending.module.scss';
 
 export const Trending = () => {

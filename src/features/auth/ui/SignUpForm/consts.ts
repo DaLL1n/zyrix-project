@@ -1,10 +1,10 @@
 import type z from 'zod';
 import type { signUpSchema } from '../../model/auth.schemas';
 
-export const REGISTER_FORM_CONTENT = {
+export const SIGN_UP_FORM_CONTENT = {
   buttonText: 'Sign Up to your account',
   footerText: 'Already have an account?',
-  footerLink: 'Sign in',
+  footerLinkText: 'Log In',
   checkboxText:
     'By creating an account, I agree to Zyrix’s Terms and Privacy Policy',
 } as const;
@@ -13,24 +13,22 @@ export const REGISTER_FORM_CONTENT = {
 
 type FieldName = keyof Omit<z.infer<typeof signUpSchema>, 'termsAccepted'>;
 
-type RegisterFieldType = 'text' | 'email' | 'password';
+type SignUpFieldType = 'text' | 'email' | 'password';
 
-type RegisterFormField = {
+type SignUpFormField = {
   name: FieldName;
-  type: RegisterFieldType;
+  type: SignUpFieldType;
   placeholder: string;
   autoComplete: string;
-  'aria-autocomplete': 'inline' | 'list' | 'both' | 'none';
   'aria-label': string;
 };
 
-export const REGISTER_FORM_FIELDS = [
+export const SIGN_UP_FORM_FIELDS = [
   {
     name: 'name',
     type: 'text',
     placeholder: 'Name',
     autoComplete: 'given-name',
-    'aria-autocomplete': 'none',
     'aria-label': 'Name',
   },
   {
@@ -38,7 +36,6 @@ export const REGISTER_FORM_FIELDS = [
     type: 'text',
     placeholder: 'Surname',
     autoComplete: 'family-name',
-    'aria-autocomplete': 'none',
     'aria-label': 'Surname',
   },
   {
@@ -46,7 +43,6 @@ export const REGISTER_FORM_FIELDS = [
     type: 'email',
     placeholder: 'Email address',
     autoComplete: 'email',
-    'aria-autocomplete': 'none',
     'aria-label': 'Email address',
   },
   {
@@ -54,7 +50,6 @@ export const REGISTER_FORM_FIELDS = [
     type: 'password',
     placeholder: 'Password',
     autoComplete: 'new-password',
-    'aria-autocomplete': 'list',
     'aria-label': 'Password',
   },
   {
@@ -62,7 +57,6 @@ export const REGISTER_FORM_FIELDS = [
     type: 'password',
     placeholder: 'Confirm password',
     autoComplete: 'new-password',
-    'aria-autocomplete': 'list',
     'aria-label': 'Confirm password',
   },
-] as const satisfies readonly RegisterFormField[];
+] as const satisfies readonly SignUpFormField[];

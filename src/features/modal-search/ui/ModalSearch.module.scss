@@ -38,6 +38,7 @@
 
 .input {
   padding: rem(6px) rem(24px) rem(6px) rem(48px);
+  min-height: rem(40px);
 
   &::placeholder {
     color: #6f6f6f;
