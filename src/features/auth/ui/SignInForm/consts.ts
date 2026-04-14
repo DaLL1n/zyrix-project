@@ -24,14 +24,14 @@ export const SIGN_IN_FORM_FIELDS = {
     name: 'email',
     type: 'email',
     placeholder: 'Email address',
-    autoComplete: 'email',
+    autoComplete: 'username',
     'aria-label': 'Email address',
   },
   password: {
     name: 'password',
     type: 'password',
     placeholder: 'Password',
-    autoComplete: 'new-password',
+    autoComplete: 'current-password',
     'aria-label': 'Password',
   },
 } as const satisfies Record<FieldName, SignInFormField>;

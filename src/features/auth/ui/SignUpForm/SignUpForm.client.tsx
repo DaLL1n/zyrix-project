@@ -34,8 +34,8 @@ export const SignUpForm = () => {
       action={formAction}
       onSubmit={form.onSubmit}
       formError={form.errors?.[0]}
-      buttonText={SIGN_UP_FORM_CONTENT.buttonText}
       isSubmitDisabled={!isReadyToSubmit || isPending}
+      buttonText={SIGN_UP_FORM_CONTENT.buttonText}
       footerText={SIGN_UP_FORM_CONTENT.footerText}
       footerLinkText={SIGN_UP_FORM_CONTENT.footerLinkText}
       footerLinkHref={PATHS['SIGN_IN']}
@@ -49,11 +49,11 @@ export const SignUpForm = () => {
         const conformProps = getInputProps(conformField, {
           type: field.type,
         });
+
         const uiProps = {
           className: styles['input'],
           placeholder: field.placeholder,
           autoComplete: field.autoComplete,
-
           'aria-label': field['aria-label'],
           error: conformField.errors?.[0],
           isValid: isValidField,
