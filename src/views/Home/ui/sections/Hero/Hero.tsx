@@ -22,7 +22,7 @@ export const Hero = () => {
                 <span className={styles['tag']}>Reliable</span>
               </div>
             </div>
-            <Button className={styles['button-cta']} href={PATHS.MARKET}>
+            <Button className={styles['button-cta']} href={PATHS['SIGN_UP']}>
               <span className={styles['button-cta-inner']}>Start Trading</span>
             </Button>
           </div>
