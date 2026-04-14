@@ -42,7 +42,7 @@ export const SIGN_UP_FORM_FIELDS = [
     name: 'email',
     type: 'email',
     placeholder: 'Email address',
-    autoComplete: 'email',
+    autoComplete: 'username',
     'aria-label': 'Email address',
   },
   {
